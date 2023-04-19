@@ -8,6 +8,14 @@ const search = (data) => {
   return http.post(`/products/search`, data);
 };
 
+const getByClient = (data) => {
+  return http.post(`/products/get-by-client`, data);
+};
+
+const getByPath = (data) => {
+  return http.post(`/products/get-by-path`, data);
+};
+
 const getById = (id) => {
   return http.get(`/products/${id}`);
 };
@@ -27,6 +35,8 @@ const remove = (id) => {
 const ProductService = {
   get,
   search,
+  getByClient,
+  getByPath,
   getById,
   create,
   update,

@@ -1,7 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap");
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
 
+body {
+  font-family: "Montserrat", sans-serif;
+}
 .mainmenu > .menu-item-has-children > a::after {
   font-family: FontAwesome;
   content: "\f107";
@@ -195,7 +206,7 @@ body .closeMask {
 
 .header-style-5 .header-action .axil-search input {
   border-radius: 20px;
-  border: 1px solid #e1e1e1;
+  border: 2px solid #e1e1e1;
   cursor: pointer;
 }
 
@@ -352,4 +363,188 @@ swiper-container {
   animation-delay: 0.8s;
   animation-fill-mode: both;
   animation-loop: infinite;
+}
+
+.main-slider-content--desc p {
+  color: #fff;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.main-slider-content .title {
+  margin-bottom: 30px;
+}
+
+.main-slider-style-5 .slider-box-wrap::after {
+  display: none;
+}
+
+.main-slider-style-5 .main-slider-thumb img {
+  min-height: 900px;
+  max-height: 900px;
+}
+
+.footer-dark .axil-footer-widget .widget-title {
+  font-weight: bold;
+}
+
+.footer-dark .axil-footer-widget .inner ul li a {
+  cursor: pointer;
+}
+
+.axil-breadcrumb-area {
+  padding: 30px 0;
+}
+
+.form-control.focusError {
+  border-color: #ff0000 !important;
+}
+
+.Toastify__close-button {
+  width: unset !important;
+  align-self: center !important;
+}
+
+.button__loading {
+  position: relative;
+}
+/* 
+.button__loading:hover {
+  background-color: #ff6600;
+}
+
+.button__loading:focus {
+  outline: 0.05em dashed #ff6600;
+  outline-offset: 0.05em;
+} */
+
+.button__loading::after {
+  content: "";
+  display: block;
+  width: 1.2em;
+  height: 1.2em;
+  position: absolute;
+  left: calc(50% - 0.65em);
+  top: calc(50% - 0.65em);
+  border: 0.15em solid transparent;
+  border-right-color: white;
+  border-radius: 50%;
+  animation: button-anim 0.7s linear infinite;
+  opacity: 0;
+}
+
+@keyframes button-anim {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.button__loading.loading {
+  color: transparent;
+}
+
+.button__loading.loading::after {
+  opacity: 1;
+}
+
+/* .button__tag.button__loading {
+  width: 100%;
+} */
+
+.text-sub {
+  /* color: var(--color-secondary); */
+  color: #fff;
+}
+
+.axil-product > .thumbnail > a {
+  /* box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important; */
+  border: 2px solid #e1e1e1;
+  box-shadow: unset !important;
+}
+
+.axil-product .product-content .title a:hover {
+  color: var(--color-secondary);
+}
+
+.pagination-container {
+  justify-content: start;
+  padding: 20px 0;
+}
+
+.pagination-container .pagination-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 7px !important;
+}
+
+.pagination-container .pagination-item.selected {
+  background: var(--color-primary) !important;
+  color: #fff !important;
+}
+
+.category-active h6 {
+  color: var(--color-secondary) !important;
+}
+
+.category-active img {
+  /* box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important; */
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
+  border: 5px solid var(--color-primary) !important;
+}
+
+.cart-dropdown .cart-item .item-img .close-btn {
+  left: 0px;
+}
+
+/* html:has(.cart-dropdown-wrap) {
+  overflow-y: hidden;
+} */
+
+.color-group__item {
+  height: 58px;
+  width: 58px;
+  border: 2px solid black;
+  border-radius: 5px;
+  /* margin-right: 10px; */
+  margin-right: 0;
+}
+
+.axil-product > .thumbnail > a {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
+}
+
+.axil-mainmenu.axil-sticky {
+  z-index: 5;
+}
+
+input.form-control {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
+  color: black !important;
+}
+
+small.text-red-600 > * {
+  color: red;
+  font-weight: bold;
+}
+
+small {
+  display: inline-block;
+  /* display: none; */
+  /* opacity: 0; */
+  /* visibility: hidden; */
+  padding: 2px;
+}
+
+.focusError > div {
+  border-color: red !important;
+}
+
+.form-group label {
+  font-size: 12px;
 }

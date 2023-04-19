@@ -1,0 +1,113 @@
+.axil-section-gap {
+  padding: 20px 0;
+}
+
+.axil-dashboard-overview {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
+  color: black;
+  padding: 30px 50px;
+  border: 1px solid var(--color-light);
+  border-radius: 8px;
+  & * {
+    font-weight: 600;
+    color: #4b4b4b;
+  }
+  .welcome-text {
+    padding-top: 9px;
+    margin-bottom: 50px;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  .bye-text {
+    margin-top: 50px;
+    p {
+      color: black;
+      margin-bottom: 10px;
+    }
+  }
+
+  strong {
+    font-weight: bold !important;
+  }
+
+  .profile-image {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid black;
+    margin-bottom: 80px;
+    padding: 10px;
+  }
+
+  .image-preview {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid #d6d6d6;
+  }
+
+  .axil-btn:not(.axil-btn-remove-image) {
+    font-size: 14px;
+    background: black;
+    color: #fff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .axil-product-table {
+    box-shadow: unset;
+  }
+
+  .axil-product-table.axil-cart-table th:first-child,
+  .axil-product-table.axil-cart-table td:first-child {
+    // padding-left: 20px !important;
+  }
+
+  .axil-product-table.axil-cart-table th {
+    border-bottom: 2px solid black;
+  }
+
+  .axil-product-table.axil-cart-table td {
+    font-style: italic;
+    color: #353535;
+  }
+
+  .remove-wishlist {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 2px solid black;
+    margin-left: 10px;
+    cursor: pointer;
+
+    i {
+      color: black !important;
+      font-weight: bold;
+    }
+  }
+
+  .btn-add-address {
+    width: 150px;
+    background: black;
+    color: #fff;
+    border-radius: 5px;
+  }
+
+  .css-1dimb5e-singleValue {
+    color: black !important;
+  }
+}
+.form-group {
+  // margin-bottom: 20px !important;
+}

@@ -340,7 +340,8 @@ li {
 .available {
   font-weight: 600;
   /* color: #63ab01; */
-  color: var(--color-secondary);
+  /* color: var(--color-secondary); */
+  color: var(--color-primary);
 }
 
 .sold {
@@ -353,8 +354,9 @@ li {
 }
 
 .axil-product > .thumbnail > a {
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset !important;
+  /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset !important; */
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
 }
 
 .category-select .dropdown {

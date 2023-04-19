@@ -1,16 +1,68 @@
 // import React from "react";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import logo_white from "../../assets/images/logo-white.jpg";
 import logo_black from "../../assets/images/logo-black.jpg";
+import mvr_logo from "../../assets/images/mvr-logo.jpg";
 import { LANGUAGES } from "../../common/Variable";
-
-const Header = ({ setShowCartDropdown, setShowHeaderSearch }) => {
+import UserService from "../../services/user.service";
+const Header = ({
+  setShowCartDropdown,
+  setShowHeaderSearch,
+  categories,
+  loading,
+  setLoading,
+  setCustomer,
+  cartNumber,
+  customer,
+}) => {
+  let navigate = useNavigate();
   const [toggle, setToggle] = useState({
     language: false,
     account: false,
   });
 
   const [language, setLanguage] = useState(LANGUAGES[0]);
+
+  //Header sticky
+  const handleHeaderSticky = () => {
+    const bodyElm = document.querySelector("body");
+    if (bodyElm.classList.contains("sticky-header")) {
+      const stickyPlaceHolder = document.querySelector(
+        "#axil-sticky-placeholder"
+      );
+      const menu = document.querySelector(".axil-mainmenu");
+      const menuH = menu && menu.scrollHeight;
+
+      const topHeaderItem = document.querySelector(".axil-header-top");
+      const topHeaderH = topHeaderItem && (topHeaderItem.scrollHeight || 0);
+      const targetScroll = topHeaderH;
+
+      if (window.scrollY > targetScroll) {
+        if (menu) menu.classList.add("axil-sticky");
+        if (stickyPlaceHolder) stickyPlaceHolder.style.height = menuH;
+      } else {
+        if (menu) menu.classList.remove("axil-sticky");
+        if (stickyPlaceHolder) stickyPlaceHolder.style.height = 0;
+      }
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("TOKEN");
+    localStorage.removeItem("ROLE");
+    localStorage.removeItem("CUSTOMER");
+    // setCustomer(null);
+    navigate("/login");
+  };
+
+  // Sticky Menu Area
+  useEffect(() => {
+    window.addEventListener("scroll", handleHeaderSticky);
+    return () => {
+      window.removeEventListener("scroll", handleHeaderSticky);
+    };
+  });
 
   return (
     <>
@@ -113,12 +165,23 @@ const Header = ({ setShowCartDropdown, setShowHeaderSearch }) => {
                     <li>
                       <a href="#">Trợ Giúp</a>
                     </li>
-                    <li>
-                      <a href="sign-up.html">Đăng Ký</a>
-                    </li>
-                    <li>
-                      <a href="sign-in.html">Đăng Nhập</a>
-                    </li>
+                    {customer && !loading ? (
+                      <>
+                        <li className="text-sub font-bold">
+                          <i className="fa-solid fa-hand"></i> Hi,{" "}
+                          {customer.customer?.customerName}
+                        </li>
+                      </>
+                    ) : (
+                      <>
+                        <li>
+                          <Link to="/register">Đăng Ký</Link>
+                        </li>
+                        <li>
+                          <Link to="/login">Đăng Nhập</Link>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -131,20 +194,20 @@ const Header = ({ setShowCartDropdown, setShowHeaderSearch }) => {
           <div className="container">
             <div className="header-navbar">
               <div className="header-brand">
-                <a href="index.html" className="logo logo-dark">
+                <Link to="/" className="logo logo-dark">
                   <img
                     src={logo_black}
                     alt="Site Logo"
                     className="w-[160px] h-[40px]"
                   />
-                </a>
-                <a href="index.html" className="logo logo-light">
+                </Link>
+                <Link to="/" className="logo logo-light">
                   <img
                     src={logo_white}
                     alt="Site Logo"
                     className="w-[160px] h-[40px]"
                   />
-                </a>
+                </Link>
               </div>
               <div className="header-main-nav">
                 {/* <!-- Start Mainmanu Nav --> */}
@@ -162,7 +225,7 @@ const Header = ({ setShowCartDropdown, setShowHeaderSearch }) => {
                   </div>
                   <ul className="mainmenu">
                     <li className="">
-                      <a href="#">Trang Chủ</a>
+                      <Link to="/">Trang Chủ</Link>
                       {/* <ul className="axil-submenu">
                         <li>
                           <a href="index-1.html">Home - Electronics</a>
@@ -283,92 +346,29 @@ const Header = ({ setShowCartDropdown, setShowHeaderSearch }) => {
                       </ul>
                     </li> */}
                     <li className="menu-item-has-children">
-                      <a href="#">Cửa Hàng</a>
+                      <a href={undefined} style={{ color: "#292930" }}>
+                        Cửa Hàng
+                      </a>
                       <ul className="axil-submenu">
-                        <li>
-                          <a href="wishlist.html">Wishlist</a>
-                        </li>
-                        <li>
-                          <a href="cart.html">Cart</a>
-                        </li>
-                        <li>
-                          <a href="checkout.html">Checkout</a>
-                        </li>
+                        {categories &&
+                          categories.map((category, index) => (
+                            <li key={index}>
+                              <Link
+                                to={"/c/" + category.path}
+                                className="cursor-pointer"
+                              >
+                                {category.categoryName}
+                              </Link>
+                            </li>
+                          ))}
                       </ul>
                     </li>
                     <li className="">
                       <a href="#">Bộ Sưu Tập</a>
-                      {/* <ul className="axil-submenu">
-                        <li>
-                          <a href="wishlist.html">Wishlist</a>
-                        </li>
-                        <li>
-                          <a href="cart.html">Cart</a>
-                        </li>
-                        <li>
-                          <a href="checkout.html">Checkout</a>
-                        </li>
-                        <li>
-                          <a href="my-account.html">Account</a>
-                        </li>
-                        <li>
-                          <a href="sign-up.html">Sign Up</a>
-                        </li>
-                        <li>
-                          <a href="sign-in.html">Sign In</a>
-                        </li>
-                        <li>
-                          <a href="forgot-password.html">Forgot Password</a>
-                        </li>
-                        <li>
-                          <a href="reset-password.html">Reset Password</a>
-                        </li>
-                        <li>
-                          <a href="privacy-policy.html">Privacy Policy</a>
-                        </li>
-                        <li>
-                          <a href="coming-soon.html">Coming Soon</a>
-                        </li>
-                        <li>
-                          <a href="404.html">404 Error</a>
-                        </li>
-                        <li>
-                          <a href="typography.html">Typography</a>
-                        </li>
-                      </ul> */}
                     </li>
                     <li>
                       <a href="about-us.html">Liên Hệ</a>
                     </li>
-                    {/* <li className="menu-item-has-children">
-                      <a href="#">Blog</a>
-                      <ul className="axil-submenu">
-                        <li>
-                          <a href="blog.html">Blog List</a>
-                        </li>
-                        <li>
-                          <a href="blog-grid.html">Blog Grid</a>
-                        </li>
-                        <li>
-                          <a href="blog-details.html">Standard Post</a>
-                        </li>
-                        <li>
-                          <a href="blog-gallery.html">Gallery Post</a>
-                        </li>
-                        <li>
-                          <a href="blog-video.html">Video Post</a>
-                        </li>
-                        <li>
-                          <a href="blog-audio.html">Audio Post</a>
-                        </li>
-                        <li>
-                          <a href="blog-quote.html">Quote Post</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="contact.html">Contact</a>
-                    </li> */}
                   </ul>
                 </nav>
                 {/* <!-- End Mainmanu Nav --> */}
@@ -418,7 +418,7 @@ const Header = ({ setShowCartDropdown, setShowHeaderSearch }) => {
                       className="cart-dropdown-btn cursor-pointer"
                       onClick={() => setShowCartDropdown(true)}
                     >
-                      <span className="cart-count">3</span>
+                      <span className="cart-count">{cartNumber || 0}</span>
                       <i className="flaticon-shopping-cart"></i>
                     </a>
                   </li>
@@ -440,34 +440,43 @@ const Header = ({ setShowCartDropdown, setShowHeaderSearch }) => {
                       }
                     >
                       <span className="title">Đến Trang</span>
-                      <ul>
-                        <li>
-                          <a href="my-account.html">Tài Khoản Của Bạn</a>
-                        </li>
-                        <li>
-                          <a href="#">Theo Dõi Đơn Hàng</a>
-                        </li>
-                        <li>
-                          <a href="#">Địa Chỉ Nhận Hàng</a>
-                        </li>
-                        <li>
-                          <a href="#">Đăng Xuất</a>
-                        </li>
-                      </ul>
-                      <div className="login-btn">
-                        <a
-                          href="sign-in.html"
-                          className="axil-btn btn-bg-primary"
-                        >
-                          Đăng Nhập
-                        </a>
-                      </div>
-                      <div className="reg-footer text-center">
-                        Chưa có tài khoản?{" "}
-                        <a href="sign-up.html" className="btn-link">
-                          Đăng Ký.
-                        </a>
-                      </div>
+                      {customer ? (
+                        <>
+                          <ul>
+                            <li>
+                              <a href="my-account.html">Tài Khoản Của Bạn</a>
+                            </li>
+                            <li>
+                              <a href="#">Theo Dõi Đơn Hàng</a>
+                            </li>
+                            <li>
+                              <a href="#">Địa Chỉ Nhận Hàng</a>
+                            </li>
+                            <li>
+                              <a href="#" onClick={logout}>
+                                Đăng Xuất
+                              </a>
+                            </li>
+                          </ul>
+                        </>
+                      ) : (
+                        <>
+                          <div className="login-btn">
+                            <Link
+                              to="/login"
+                              className="axil-btn btn-bg-primary"
+                            >
+                              Đăng Nhập
+                            </Link>
+                          </div>
+                          <div className="reg-footer text-center">
+                            Chưa có tài khoản?{" "}
+                            <Link to="/register" className="btn-link">
+                              Đăng Ký.
+                            </Link>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </li>
                   <li className="axil-mobile-toggle">

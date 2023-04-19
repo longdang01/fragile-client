@@ -289,6 +289,37 @@ const ordersDetailModalValidator = (data) => {
     .validate(data, { abortEarly: false, allowUnknown: true });
 };
 
+const cartDetailModalValidator = (data) => {
+  data.quantity = String(data.quantity);
+  data.product =
+    data.product && data.product._id ? data.product._id : data.product;
+  data.color = data.color && data.color._id ? data.color._id : data.color;
+  data.size = data.size && data.size._id ? data.size._id : data.size;
+
+  const schema = Joi.object().keys({
+    // invoice: Joi.string().required(),
+    product: Joi.string().required(),
+    color: Joi.string().required(),
+    size: Joi.string().required(),
+    quantity: Joi.string()
+      .required()
+      .pattern(/^[0-9]+$/)
+      .required()
+      .messages({
+        "string.pattern.base": "Là các ký tự số",
+      }),
+  });
+
+  return schema
+    .messages({
+      //   "string.base": `"a" should be a type of 'text'`,
+      //   "string.min": `"a" should have a minimum length of {#limit}`,
+      "string.empty": `Không được để trống`,
+      "any.required": `Bắt buộc phải nhập`,
+    })
+    .validate(data, { abortEarly: false, allowUnknown: true });
+};
+
 const categoryModalValidator = (data) => {
   const schema = Joi.object().keys({
     categoryName: Joi.string().required(),
@@ -392,6 +423,44 @@ const supplierModalValidator = (data) => {
     .validate(data, { abortEarly: false, allowUnknown: true });
 };
 
+const deliveryAddressModalValidator = (data) => {
+  data.active = String(data.active);
+  const region =
+    data.country == 1
+      ? {
+          province: Joi.string(),
+          district: Joi.string(),
+          ward: Joi.string(),
+        }
+      : null;
+
+  const schema = Joi.object().keys({
+    customer: Joi.string().required(),
+    deliveryAddressName: Joi.string().required(),
+    consigneeName: Joi.string().required(),
+    consigneePhone: Joi.string()
+      .length(10)
+      .pattern(/^[0-9]+$/)
+      .required()
+      .messages({
+        "string.pattern.base": "Số điện thoại là các ký tự số",
+        "string.length": "Số điện thoại có 10 ký tự",
+      }),
+    country: Joi.string().required(),
+    ...region,
+    active: Joi.string().required(),
+  });
+
+  return schema
+    .messages({
+      //   "string.base": `"a" should be a type of 'text'`,
+      //   "string.min": `"a" should have a minimum length of {#limit}`,
+      "string.empty": `Không được để trống`,
+      "any.required": `Bắt buộc phải nhập`,
+    })
+    .validate(data, { abortEarly: false, allowUnknown: true });
+};
+
 const collectionModalValidator = (data) => {
   const schema = Joi.object().keys({
     collectionName: Joi.string().required(),
@@ -441,7 +510,46 @@ const customerModalValidator = (data) => {
       .messages({ "any.only": "Nhập lại mật khẩu chưa chính xác" })
       .required(),
     customerName: Joi.string().required(),
-    phone: Joi.string().required(),
+    phone: Joi.string()
+      .length(10)
+      .pattern(/^[0-9]+$/)
+      .required()
+      .messages({
+        "string.pattern.base": "Số điện thoại là các ký tự số",
+        "string.length": "Số điện thoại có 10 ký tự",
+      }),
+  });
+
+  return schema
+    .messages({
+      //   "string.base": `"a" should be a type of 'text'`,
+      //   "string.min": `"a" should have a minimum length of {#limit}`,
+      "string.empty": `Không được để trống`,
+      "any.required": `Bắt buộc phải nhập`,
+    })
+    .validate(data, { abortEarly: false, allowUnknown: true });
+};
+
+const profileModalValidator = (data) => {
+  data.role = String(data.role);
+
+  const schema = Joi.object().keys({
+    username: Joi.string().required(),
+    email: Joi.string()
+      .email({ tlds: { allow: false } })
+      .messages({
+        "string.email": "Email không hợp lệ",
+      }),
+    customerName: Joi.string().required(),
+    phone: Joi.string()
+      .length(10)
+      .pattern(/^[0-9]+$/)
+      .required()
+      .messages({
+        "string.pattern.base": "Số điện thoại là các ký tự số",
+        "string.length": "Số điện thoại có 10 ký tự",
+      }),
+    role: Joi.string().required(),
   });
 
   return schema
@@ -469,7 +577,14 @@ const staffModalValidator = (data) => {
         "string.email": "Email không hợp lệ",
       }),
     staffName: Joi.string().required(),
-    phone: Joi.string().required(),
+    phone: Joi.string()
+      .length(10)
+      .pattern(/^[0-9]+$/)
+      .required()
+      .messages({
+        "string.pattern.base": "Số điện thoại là các ký tự số",
+        "string.length": "Số điện thoại có 10 ký tự",
+      }),
     role: Joi.string().required(),
   });
 
@@ -516,7 +631,10 @@ export {
   invoiceDetailModalValidator,
   ordersModalValidator,
   ordersDetailModalValidator,
+  cartDetailModalValidator,
   customerModalValidator,
+  profileModalValidator,
   staffModalValidator,
   userModalValidator,
+  deliveryAddressModalValidator,
 };

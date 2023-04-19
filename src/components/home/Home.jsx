@@ -1,7 +1,28 @@
+import { useEffect } from "react";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Hero from "./Hero";
+
+const TITLE = "Trang Chủ";
+const TITLE_NAME = "Trang Chủ";
+
 const Home = () => {
+  const [loading, setLoading] = useOutletContext();
+
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <meta charset="utf-8" />
+          <link rel="icon" href="/favicon.ico" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000" />
+          <title>
+            {TITLE + " / Fragile - Thương Hiệu Thời Trang Việt Nam"}
+          </title>
+        </Helmet>
+      </HelmetProvider>
+
       <Hero />
       {/* {/* <!-- Start Slider Area --> */}
       {/* <div className="axil-main-slider-area main-slider-style-3">

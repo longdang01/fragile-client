@@ -21,7 +21,7 @@ const Footer = () => {
                       Fragile
                     </a>
                   </div> */}
-                  <h5 className="widget-title">Fragile</h5>
+                  <h5 className="widget-title">FRAGILE</h5>
 
                   <div className="inner">
                     <ul>
@@ -162,7 +162,7 @@ const Footer = () => {
                     <li>
                       © {new Date().getFullYear()}. Bản quyền thuộc về{" "}
                       <a target="_blank" href="https://axilthemes.com/">
-                        Fragile
+                        FRAGILE
                       </a>
                       .
                     </li>

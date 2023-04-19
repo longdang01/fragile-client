@@ -74,6 +74,15 @@ const getOptions = (data, label) => {
       }));
   }
 
+  if (label == "Name") {
+    result =
+      data &&
+      data.map(({ Id: value, Name: label }) => ({
+        value,
+        label,
+      }));
+  }
+
   return result;
 };
 

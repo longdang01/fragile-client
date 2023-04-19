@@ -20,7 +20,7 @@ const CURRENCIES = [
   // },
 ];
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 12;
 
 const TOAST_MESSAGE = {
   success: {
@@ -130,6 +130,39 @@ const INVOICE_PAIDS = [
   },
 ];
 
+const CARTDETAIL_STATUS = [
+  {
+    label: "Chọn Mua",
+    value: "1",
+  },
+  {
+    label: "Bỏ Chọn",
+    value: "2",
+  },
+];
+
+const COUNTRY_LIST = [
+  {
+    label: "Việt Nam",
+    value: "1",
+  },
+  {
+    label: "Khác",
+    value: "2",
+  },
+];
+
+const DELIVERYADDRESS_STATUS = [
+  {
+    label: "Mặc Định",
+    value: "1",
+  },
+  {
+    label: "Không Mặc Định",
+    value: "2",
+  },
+];
+
 export {
   LANGUAGES,
   // CURRENCIES,
@@ -139,5 +172,8 @@ export {
   ORDERS_PAYMENTS,
   ORDERS_PAIDS,
   INVOICE_PAIDS,
+  CARTDETAIL_STATUS,
   ROLES,
+  COUNTRY_LIST,
+  DELIVERYADDRESS_STATUS,
 };

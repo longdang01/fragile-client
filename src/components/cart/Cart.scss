@@ -1,0 +1,72 @@
+#checkbox-buy {
+  position: relative;
+  opacity: 1 !important;
+  transform: scale(0.5);
+  accent-color: #3577f0;
+}
+
+th {
+  font-size: 15px !important;
+  font-weight: 700;
+}
+
+.product-table-heading .title {
+  font-weight: 700 !important;
+  margin-bottom: 50px !important;
+}
+
+.axil-product-table tbody td,
+.axil-product-table tbody tr {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+
+.btn-updateCartDetail {
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.btn-updateCartDetail.background-disabled {
+  background: grey !important;
+  border-color: grey !important;
+}
+
+.axil-product-table tbody td.product-remove .remove-wishlist {
+  border-color: var(--color-primary);
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+table:not(.summery-table),
+.axil-order-summery {
+  // border: 2px solid #e1e1e1;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
+}
+
+input,
+label {
+  font-weight: bold !important;
+}
+
+.form-control {
+  // border-color: black !important;
+  border: 2px solid #c2c2c2 !important;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
+}
+
+.css-b62m3t-container {
+  border: 0;
+}
+
+.css-2z7ffv-control {
+  border: 2px solid #e1e1e1 !important;
+  border-radius: 5px;
+}
+
+.css-1dimb5e-singleValue {
+  font-weight: bold;
+  // padding: 0 10px;
+}
