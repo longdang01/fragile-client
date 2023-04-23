@@ -10,33 +10,33 @@ import { configToast } from "../config/ConfigUI";
 
 const AuthGuard = ({ children }) => {
   let navigate = useNavigate();
-  const [staff, setStaff] = useState();
+  const [customer, setCustomer] = useState();
   const hasToken = localStorage.getItem("TOKEN");
-  const hasStaff = localStorage.getItem("STAFF");
+  const hasCustomer = localStorage.getItem("CUSTOMER");
   const hasRole = localStorage.getItem("ROLE");
 
   useEffect(() => {
     async function getToken() {
       UserService.getMe()
         .then((res) => {
-          setStaff(res);
+          setCustomer(res);
         })
         .catch((err) => {
-          setStaff(-1);
+          setCustomer(-1);
         });
       // const data = hasToken && (await UserService.getMe());
-      // setStaff(data || -1);
+      // setCustomer(data || -1);
     }
     if (hasToken) getToken();
   }, []);
 
   useEffect(() => {
-    if (staff == -1 || !hasToken || !hasStaff || !hasRole) {
+    if (customer == -1 || !hasToken || !hasCustomer || !hasRole) {
       navigate("/login");
     }
-  }, [staff]);
+  }, [customer]);
 
-  return staff && children;
+  return customer && children;
 };
 
 export default AuthGuard;

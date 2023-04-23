@@ -11,8 +11,11 @@ import Breadcrumb from "../shared/Breadcrumb";
 import SideBar from "./SideBar";
 
 const Account = () => {
-  const [customer] = useOutletContext();
+  const [customer, setCustomer, cartNumber, setCartNumber] = useOutletContext();
 
+  useEffect(() => {
+    // setCustomer(null);
+  });
   return (
     <>
       <Breadcrumb currentPage="Tài Khoản" />
@@ -36,7 +39,9 @@ const Account = () => {
                 <SideBar />
               </div>
               <div className="col-xl-9 col-md-8">
-                <Outlet context={[customer]} />
+                <Outlet
+                  context={[customer, setCustomer, cartNumber, setCartNumber]}
+                />
                 {/* <router-outlet></router-outlet> */}
               </div>
             </div>

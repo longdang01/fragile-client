@@ -57,7 +57,7 @@ const Cart = () => {
   const getCart = () => {
     if (customer) {
       CartService.search({
-        customer: customer.customer._id,
+        customer: customer.customer?._id,
       })
         .then((res) => {
           setCart(res.data);
@@ -156,7 +156,7 @@ const Cart = () => {
         setIsLoading={(state) => setIsLoading(state)}
       />
 
-      {cart && (
+      {cart && customer && (
         <div className="axil-product-cart-area axil-section-gap">
           <div className="container">
             <div className="axil-product-cart-wrap">

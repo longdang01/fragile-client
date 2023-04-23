@@ -86,9 +86,9 @@ const CartModal = (props) => {
   };
 
   const getByVariant = async () => {
-    if (customer.customer && cartItem) {
+    if (customer && customer.customer && cartItem) {
       CartDetailService.getByVariant({
-        customer: customer.customer?._id,
+        customer: customer?.customer?._id,
         product: cartItem.product?._id,
         color: cartItem.color?._id,
         size: cartItem.size?._id,
@@ -147,7 +147,9 @@ const CartModal = (props) => {
   }, [props.showCartModal, props.cartItem]);
 
   useEffect(() => {
-    getByVariant();
+    if (customer) {
+      getByVariant();
+    }
   }, [customer, cartItem?.color, cartItem?.size]);
 
   return (

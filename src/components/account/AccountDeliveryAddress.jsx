@@ -60,7 +60,6 @@ const AccountDeliveryAddress = () => {
   const createDeliveryAddress = (deliveryAddress) => {
     DeliveryAddressService.create(deliveryAddress)
       .then((res) => {
-        console.log(res);
         setDeliveryAddresses(res.data.deliveryAddresses);
 
         // setDeliveryAddresses([...deliveryAddresses, res.data]);

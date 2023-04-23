@@ -16,7 +16,7 @@ import avt from "../../assets/images/avt.jpg";
 const TITLE = "Thông Tin Cá Nhân";
 
 const AccountProfile = (props) => {
-  const [customer] = useOutletContext();
+  const [customer, setCustomer] = useOutletContext();
 
   const initData = {
     _id: "",
@@ -80,8 +80,15 @@ const AccountProfile = (props) => {
   };
 
   const updateProfile = (id, profile) => {
+    document
+      .querySelector(".header-top-link > .quick-link")
+      .classList.add("hidden");
+
     CustomerService.update(id, profile)
       .then((res) => {
+        customer.customer.customerName = res.data.customerName;
+        setCustomer(null);
+        // if (res.data) setCustomer(res.data);
         res.data.username = res.data.user?.username;
         res.data.password = res.data.user?.password;
         res.data.email = res.data.user?.email;
@@ -90,6 +97,11 @@ const AccountProfile = (props) => {
         if (ref.current) ref.current.value = "";
         setImage(initImage);
         setIsLoading(false);
+        setTimeout(() => {
+          document
+            .querySelector(".header-top-link > .quick-link")
+            .classList.remove("hidden");
+        }, 1000);
         toast.success(TOAST_MESSAGE.success.update, configToast);
       })
       .catch((err) => {
@@ -124,6 +136,12 @@ const AccountProfile = (props) => {
     }
   };
 
+  useEffect(() => {
+    if (profile._id && customer) {
+      customer.customer.customerName = profile.customerName;
+      setCustomer(customer);
+    }
+  }, [isLoading]);
   // catch error when change input
   useEffect(() => {
     const validate = profileModalValidator(profile);
@@ -144,8 +162,6 @@ const AccountProfile = (props) => {
       // setImage({ ...image, preview: customer.customer.picture, raw: "" });
     }
   }, [profile._id]);
-  console.log(image.preview);
-
   return (
     <>
       <HelmetProvider>
@@ -160,237 +176,244 @@ const AccountProfile = (props) => {
         </Helmet>
       </HelmetProvider>
 
-      <div className="axil-dashboard-overview">
-        <div className="welcome-text">Thông Tin Cá Nhân,</div>
-        <div className="flex justify-start">
-          <div className="">
-            <div className="axil-dashboard-account">
-              <form className="account-details-form">
-                <div className="row">
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      {/* {profile.picture && ( */}
-                      <img
-                        src={profile.picture ? profile.picture : avt}
-                        className="profile-image"
-                      />
-                      {/* )} */}
+      {profile._id && (
+        <div className="axil-dashboard-overview">
+          <div className="welcome-text">Thông Tin Cá Nhân,</div>
+          <div className="flex justify-start">
+            <div className="">
+              <div className="axil-dashboard-account">
+                <form className="account-details-form">
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="form-group">
+                        {/* {profile.picture && ( */}
+                        <img
+                          src={profile.picture ? profile.picture : avt}
+                          className="profile-image"
+                        />
+                        {/* )} */}
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-lg-4">
-                    <div className="form-group">
-                      <label className="form-label italic">Họ và tên(*)</label>
-                      <input
-                        type="text"
-                        name="customerName"
-                        className={
-                          "form-control shadow-lg " +
-                          (showError(errors, "customerName")
-                            ? "border-[#FF0000] focusError"
-                            : "border-[#cccccc]")
-                        }
-                        required
-                        value={profile.customerName || ""}
-                        onChange={handleInput}
-                      />
-                      <small className="text-red-600">
-                        {showError(errors, "customerName") &&
-                          showError(errors, "customerName").messages.map(
-                            (message, index) => (
-                              <div key={index}>&bull; {message}</div>
-                            )
-                          )}
-                      </small>
+                    <div className="col-lg-4">
+                      <div className="form-group">
+                        <label className="form-label italic">
+                          Họ và tên(*)
+                        </label>
+                        <input
+                          type="text"
+                          name="customerName"
+                          className={
+                            "form-control shadow-lg " +
+                            (showError(errors, "customerName")
+                              ? "border-[#FF0000] focusError"
+                              : "border-[#cccccc]")
+                          }
+                          required
+                          value={profile.customerName || ""}
+                          onChange={handleInput}
+                        />
+                        <small className="text-red-600">
+                          {showError(errors, "customerName") &&
+                            showError(errors, "customerName").messages.map(
+                              (message, index) => (
+                                <div key={index}>&bull; {message}</div>
+                              )
+                            )}
+                        </small>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-lg-4">
-                    <div className="form-group">
-                      <label className="form-label italic">
-                        Số điện thoại (*)
-                      </label>
-                      <input
-                        type="text"
-                        name="phone"
-                        className={
-                          "form-control shadow-lg " +
-                          (showError(errors, "phone")
-                            ? "border-[#FF0000] focusError"
-                            : "border-[#cccccc]")
-                        }
-                        placeholder="Thể thao, Việc làm"
-                        required
-                        value={profile.phone}
-                        onChange={handleInput}
-                      />
-                      <small className="text-red-600">
-                        {showError(errors, "phone") &&
-                          showError(errors, "phone").messages.map(
-                            (message, index) => (
-                              <div key={index}>&bull; {message}</div>
-                            )
-                          )}
-                      </small>
+                    <div className="col-lg-4">
+                      <div className="form-group">
+                        <label className="form-label italic">
+                          Số điện thoại (*)
+                        </label>
+                        <input
+                          type="text"
+                          name="phone"
+                          className={
+                            "form-control shadow-lg " +
+                            (showError(errors, "phone")
+                              ? "border-[#FF0000] focusError"
+                              : "border-[#cccccc]")
+                          }
+                          placeholder="Thể thao, Việc làm"
+                          required
+                          value={profile.phone}
+                          onChange={handleInput}
+                        />
+                        <small className="text-red-600">
+                          {showError(errors, "phone") &&
+                            showError(errors, "phone").messages.map(
+                              (message, index) => (
+                                <div key={index}>&bull; {message}</div>
+                              )
+                            )}
+                        </small>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-lg-4">
-                    <div className="form-group">
-                      <label className="form-label italic">Ngày sinh (*)</label>
-                      <input
-                        type="date"
-                        name="dob"
-                        className={
-                          "form-control shadow-lg " +
-                          (showError(errors, "dob")
-                            ? "border-[#FF0000] focusError"
-                            : "border-[#cccccc]")
-                        }
-                        required
-                        value={moment(profile.dob).format("YYYY-MM-DD")}
-                        onChange={handleInput}
-                      />
-                      <small className="text-red-600">
-                        {showError(errors, "dob") &&
-                          showError(errors, "dob").messages.map(
-                            (message, index) => (
-                              <div key={index}>&bull; {message}</div>
-                            )
-                          )}
-                      </small>
+                    <div className="col-lg-4">
+                      <div className="form-group">
+                        <label className="form-label italic">
+                          Ngày sinh (*)
+                        </label>
+                        <input
+                          type="date"
+                          name="dob"
+                          className={
+                            "form-control shadow-lg " +
+                            (showError(errors, "dob")
+                              ? "border-[#FF0000] focusError"
+                              : "border-[#cccccc]")
+                          }
+                          required
+                          value={moment(profile.dob).format("YYYY-MM-DD")}
+                          onChange={handleInput}
+                        />
+                        <small className="text-red-600">
+                          {showError(errors, "dob") &&
+                            showError(errors, "dob").messages.map(
+                              (message, index) => (
+                                <div key={index}>&bull; {message}</div>
+                              )
+                            )}
+                        </small>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-lg-6">
-                    <div className="form-group mb--40">
-                      <label className="form-label italic">Username (*)</label>
-                      <input
-                        type="text"
-                        name="username"
-                        className={
-                          "form-control shadow-lg " +
-                          (showError(errors, "username")
-                            ? "border-[#FF0000] focusError"
-                            : "border-[#cccccc]")
-                        }
-                        placeholder="Thể thao, Việc làm"
-                        required
-                        value={profile.username || ""}
-                        onChange={handleInput}
-                        disabled={true}
-                      />
-                      <small className="text-red-600">
-                        {showError(errors, "username") &&
-                          showError(errors, "username").messages.map(
-                            (message, index) => (
-                              <div key={index}>&bull; {message}</div>
-                            )
-                          )}
-                      </small>
+                    <div className="col-lg-6">
+                      <div className="form-group mb--40">
+                        <label className="form-label italic">
+                          Username (*)
+                        </label>
+                        <input
+                          type="text"
+                          name="username"
+                          className={
+                            "form-control shadow-lg " +
+                            (showError(errors, "username")
+                              ? "border-[#FF0000] focusError"
+                              : "border-[#cccccc]")
+                          }
+                          placeholder="Thể thao, Việc làm"
+                          required
+                          value={profile.username || ""}
+                          onChange={handleInput}
+                          disabled={true}
+                        />
+                        <small className="text-red-600">
+                          {showError(errors, "username") &&
+                            showError(errors, "username").messages.map(
+                              (message, index) => (
+                                <div key={index}>&bull; {message}</div>
+                              )
+                            )}
+                        </small>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-lg-6">
-                    <div className="form-group mb--40">
-                      <label className="form-label italic">Email (*)</label>
-                      <input
-                        type="text"
-                        name="email"
-                        className={
-                          "form-control shadow-lg " +
-                          (showError(errors, "email")
-                            ? "border-[#FF0000] focusError"
-                            : "border-[#cccccc]")
-                        }
-                        placeholder="Thể thao, Việc làm"
-                        required
-                        value={profile.email || ""}
-                        onChange={handleInput}
-                      />
-                      <small className="text-red-600">
-                        {showError(errors, "email") &&
-                          showError(errors, "email").messages.map(
-                            (message, index) => (
-                              <div key={index}>&bull; {message}</div>
-                            )
-                          )}
-                      </small>
+                    <div className="col-lg-6">
+                      <div className="form-group mb--40">
+                        <label className="form-label italic">Email (*)</label>
+                        <input
+                          type="text"
+                          name="email"
+                          className={
+                            "form-control shadow-lg " +
+                            (showError(errors, "email")
+                              ? "border-[#FF0000] focusError"
+                              : "border-[#cccccc]")
+                          }
+                          placeholder="Thể thao, Việc làm"
+                          required
+                          value={profile.email || ""}
+                          onChange={handleInput}
+                        />
+                        <small className="text-red-600">
+                          {showError(errors, "email") &&
+                            showError(errors, "email").messages.map(
+                              (message, index) => (
+                                <div key={index}>&bull; {message}</div>
+                              )
+                            )}
+                        </small>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="form-group mb--40">
-                      <label className="form-label italic">Địa chỉ</label>
-                      <input
-                        type="text"
-                        name="address"
-                        className={
-                          "form-control shadow-lg " +
-                          (showError(errors, "address")
-                            ? "border-[#FF0000] focusError"
-                            : "border-[#cccccc]")
-                        }
-                        required
-                        value={profile.address}
-                        onChange={handleInput}
-                      />
-                      <small className="text-red-600">
-                        {showError(errors, "address") &&
-                          showError(errors, "address").messages.map(
-                            (message, index) => (
-                              <div key={index}>&bull; {message}</div>
-                            )
-                          )}
-                      </small>
+                    <div className="col-12">
+                      <div className="form-group mb--40">
+                        <label className="form-label italic">Địa chỉ</label>
+                        <input
+                          type="text"
+                          name="address"
+                          className={
+                            "form-control shadow-lg " +
+                            (showError(errors, "address")
+                              ? "border-[#FF0000] focusError"
+                              : "border-[#cccccc]")
+                          }
+                          required
+                          value={profile.address}
+                          onChange={handleInput}
+                        />
+                        <small className="text-red-600">
+                          {showError(errors, "address") &&
+                            showError(errors, "address").messages.map(
+                              (message, index) => (
+                                <div key={index}>&bull; {message}</div>
+                              )
+                            )}
+                        </small>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="form-group mb--40">
-                      <label>Ảnh Đại Diện</label>
-                      <input
-                        type="text"
-                        name="picture"
-                        className="form-control border-[#cccccc] shadow-lg mb-[8px]"
-                        required
-                        value={profile.picture || "Chưa có hình ảnh"}
-                        readOnly
-                      />
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="form-control form-image border-[#cccccc] shadow-lg mb-[8px]"
-                        onChange={handleImage}
-                        ref={ref}
-                        style={{
-                          lineHeight: "36px",
-                        }}
-                      />
-                      {image.preview && (
-                        <div>
-                          <img
-                            src={image.preview}
-                            alt="Thumb"
-                            className="mb-[8px] image-preview"
-                          />
-                        </div>
-                      )}
-                      <input
-                        type="button"
-                        onClick={(e) => handleImageRemove(false)}
-                        className="axil-btn axil-btn-remove-image"
-                        value="Xóa hình ảnh"
-                      />
+                    <div className="col-12">
+                      <div className="form-group mb--40">
+                        <label>Ảnh Đại Diện</label>
+                        <input
+                          type="text"
+                          name="picture"
+                          className="form-control border-[#cccccc] shadow-lg mb-[8px]"
+                          required
+                          value={profile.picture || "Chưa có hình ảnh"}
+                          readOnly
+                        />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="form-control form-image border-[#cccccc] shadow-lg mb-[8px]"
+                          onChange={handleImage}
+                          ref={ref}
+                          style={{
+                            lineHeight: "36px",
+                          }}
+                        />
+                        {image.preview && (
+                          <div>
+                            <img
+                              src={image.preview}
+                              alt="Thumb"
+                              className="mb-[8px] image-preview"
+                            />
+                          </div>
+                        )}
+                        <input
+                          type="button"
+                          onClick={(e) => handleImageRemove(false)}
+                          className="axil-btn axil-btn-remove-image"
+                          value="Xóa hình ảnh"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="form-group mb--0">
-                      <button
-                        onClick={onSave}
-                        className={
-                          isLoading
-                            ? "axil-btn button__loading loading capitalize"
-                            : "axil-btn button__loading capitalize"
-                        }
-                        disabled={isLoading}
-                      >
-                        {!isLoading ? "Cập nhật thông tin" : ""}
-                      </button>
-                      {/* <input
+                    <div className="col-12">
+                      <div className="form-group mb--0">
+                        <button
+                          onClick={onSave}
+                          className={
+                            isLoading
+                              ? "axil-btn button__loading loading capitalize"
+                              : "axil-btn button__loading capitalize"
+                          }
+                          disabled={isLoading}
+                        >
+                          {!isLoading ? "Cập nhật thông tin" : ""}
+                        </button>
+                        {/* <input
                         type="button"
                         // className="axil-btn"
                         value="Cập nhật thông tin"
@@ -410,14 +433,15 @@ const AccountProfile = (props) => {
                         disabled={isLoading}
                         onClick={onSave}
                       /> */}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

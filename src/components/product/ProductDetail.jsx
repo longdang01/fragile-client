@@ -102,9 +102,9 @@ const ProductDetail = () => {
   };
 
   const getByVariant = async () => {
-    if (customer.customer && product && color && size) {
+    if (customer && customer.customer && product && color && size) {
       CartDetailService.getByVariant({
-        customer: customer.customer?._id,
+        customer: customer?.customer?._id,
         product: product?._id,
         color: color?._id,
         size: size?._id,
@@ -136,23 +136,27 @@ const ProductDetail = () => {
       return;
     }
 
-    setIsLoading(true);
-    CartDetailService.create({
-      customer: customer.customer?._id,
-      product: product?._id,
-      color: color?._id,
-      size: size?._id,
-      quantity: quantity,
-    })
-      .then((res) => {
-        setIsLoading(false);
-        if (!variant) setCartNumber(cartNumber + 1);
-        toast.success("Đã thêm vào giỏ hàng", configToast);
+    if (customer && customer.customer) {
+      setIsLoading(true);
+      CartDetailService.create({
+        customer: customer.customer?._id,
+        product: product?._id,
+        color: color?._id,
+        size: size?._id,
+        quantity: quantity,
       })
-      .catch((err) => {
-        setIsLoading(false);
-        toast.error("Thêm thất bại", configToast);
-      });
+        .then((res) => {
+          setIsLoading(false);
+          if (!variant) setCartNumber(cartNumber + 1);
+          toast.success("Đã thêm vào giỏ hàng", configToast);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          toast.error("Thêm thất bại", configToast);
+        });
+    } else {
+      toast.error("Đăng nhập để thêm sản phẩm vào giỏ hàng", configToast);
+    }
   };
 
   useEffect(() => {

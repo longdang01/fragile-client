@@ -45,7 +45,7 @@ const Layout = () => {
 
   const getCart = () => {
     CartService.search({
-      customer: customer.customer._id,
+      customer: customer.customer?._id,
     })
       .then((res) => {
         setCartNumber(res.data.cartDetails.length);
@@ -58,10 +58,11 @@ const Layout = () => {
   useEffect(() => {
     getCategories();
     getCustomer();
-  }, [hasToken]);
+  }, [hasToken, customer?.customer?.customerName]);
 
   useEffect(() => {
     if (customer) getCart();
+    // else setCartNumber(0);
   }, [customer, cartNumber]);
 
   useEffect(() => {
@@ -82,6 +83,7 @@ const Layout = () => {
             setShowCartDropdown={(state) => setShowCartDropdown(state)}
             setShowHeaderSearch={(state) => setShowHeaderSearch(state)}
             setCustomer={(customer) => setCustomer(customer)}
+            setCartNumber={(num) => setCartNumber(num)}
             categories={categories}
             cartNumber={cartNumber}
             loading={loading}
@@ -93,6 +95,7 @@ const Layout = () => {
             <Outlet
               context={[
                 customer,
+                setCustomer,
                 cartNumber,
                 setCartNumber,
                 loading,

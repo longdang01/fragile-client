@@ -10,9 +10,11 @@ import Login from "./components/user/Login";
 import Register from "./components/user/Register";
 import AccountDashboard from "./components/account/AccountDashboard";
 import AccountProfile from "./components/account/AccountProfile";
-import AccountResetPassword from "./components/account/AccountResetPassword";
+import AccountChangePassword from "./components/account/AccountChangePassword";
 import AccountDeliveryAddress from "./components/account/AccountDeliveryAddress";
 import Account from "./components/account/Account";
+
+import AuthGuard from "./guard/AuthGuard";
 
 function App() {
   return (
@@ -32,7 +34,14 @@ function App() {
             <Route path="home" element={<Home />}></Route>
             <Route path="cart" element={<Cart />}></Route>
 
-            <Route path="account" element={<Account />}>
+            <Route
+              path="account"
+              element={
+                <AuthGuard>
+                  <Account />
+                </AuthGuard>
+              }
+            >
               {/* <Route
                 path=""
                 element={<Navigate to="/account/dashboard" />}
@@ -40,8 +49,8 @@ function App() {
               <Route path="dashboard" element={<AccountDashboard />}></Route>
               <Route path="profile" element={<AccountProfile />}></Route>
               <Route
-                path="reset-password"
-                element={<AccountResetPassword />}
+                path="change-password"
+                element={<AccountChangePassword />}
               ></Route>
               <Route
                 path="delivery-address"

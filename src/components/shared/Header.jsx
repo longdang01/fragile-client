@@ -13,9 +13,13 @@ const Header = ({
   loading,
   setLoading,
   setCustomer,
+  customerName,
   cartNumber,
+  setCartNumber,
   customer,
 }) => {
+  const hasToken = localStorage.getItem("TOKEN");
+
   let navigate = useNavigate();
   const [toggle, setToggle] = useState({
     language: false,
@@ -52,7 +56,8 @@ const Header = ({
     localStorage.removeItem("TOKEN");
     localStorage.removeItem("ROLE");
     localStorage.removeItem("CUSTOMER");
-    // setCustomer(null);
+    setCartNumber(0);
+    setCustomer(null);
     navigate("/login");
   };
 
@@ -165,11 +170,12 @@ const Header = ({
                     <li>
                       <a href="#">Trợ Giúp</a>
                     </li>
-                    {customer && !loading ? (
+                    {customer && !loading && hasToken ? (
                       <>
                         <li className="text-sub font-bold">
                           <i className="fa-solid fa-hand"></i> Hi,{" "}
-                          {customer.customer?.customerName}
+                          {customer?.customer?.customerName}
+                          {/* {customerName} */}
                         </li>
                       </>
                     ) : (
@@ -444,13 +450,24 @@ const Header = ({
                         <>
                           <ul>
                             <li>
-                              <a href="my-account.html">Tài Khoản Của Bạn</a>
+                              <Link to="/account/profile">
+                                Tài Khoản Của Bạn
+                              </Link>
                             </li>
                             <li>
-                              <a href="#">Theo Dõi Đơn Hàng</a>
+                              <Link to="/account/orders">
+                                Theo Dõi Đơn Hàng
+                              </Link>
                             </li>
                             <li>
-                              <a href="#">Địa Chỉ Nhận Hàng</a>
+                              <Link to="/account/delivery-address">
+                                Địa Chỉ Nhận Hàng
+                              </Link>
+                            </li>
+                            <li>
+                              <Link to="/account/change-password">
+                                Đổi Mật Khẩu
+                              </Link>
                             </li>
                             <li>
                               <a href="#" onClick={logout}>

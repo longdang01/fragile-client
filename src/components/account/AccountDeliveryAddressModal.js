@@ -24,7 +24,7 @@ var slugify = require("slugify");
 const AccountDeliveryAddressModal = (props) => {
   const initData = {
     _id: "",
-    customer: props.customer.customer?._id,
+    customer: props.customer?.customer?._id,
     deliveryAddressName: "",
     consigneeName: "",
     consigneePhone: "",
@@ -99,8 +99,6 @@ const AccountDeliveryAddressModal = (props) => {
   const onSave = async () => {
     const validate = deliveryAddressModalValidator(deliveryAddress);
 
-    console.log(validate);
-    console.log(deliveryAddress);
     if (validate.error) {
       const errors = getErrors(validate);
       setErrors(errors);

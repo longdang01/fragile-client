@@ -55,10 +55,10 @@ const SideBar = () => {
               <span>Thông Tin Tài Khoản</span>
             </Link>
             <Link
-              to="/account/reset-password"
+              to="/account/change-password"
               className={
                 "nav-item nav-link " +
-                (pathname == "/account/reset-password" ? "active" : "")
+                (pathname == "/account/change-password" ? "active" : "")
               }
             >
               <i className="fas fa-user"></i>

@@ -48,7 +48,7 @@ const CartDropdown = ({ showCartDropdown, setShowCartDropdown, customer }) => {
   const getCart = () => {
     if (customer) {
       CartService.search({
-        customer: customer.customer._id,
+        customer: customer.customer?._id,
       })
         .then((res) => {
           setCart(res.data);
@@ -292,6 +292,10 @@ const CartDropdown = ({ showCartDropdown, setShowCartDropdown, customer }) => {
                     </div>
                   </div>
                 </>
+              )}
+
+              {!customer && (
+                <span className="font-bold">Đăng nhập để xem giỏ hàng</span>
               )}
             </div>
           </div>
