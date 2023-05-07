@@ -2,7 +2,7 @@ import { CSSTransition } from "react-transition-group";
 
 import ReactDOM from "react-dom";
 import React, { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { TOAST_MESSAGE, PAGE_SIZE } from "../../common/Variable";
 import { configToast } from "../../config/ConfigUI";
@@ -10,7 +10,12 @@ import CartService from "../../services/cart.service";
 import ConfirmDialog from "../shared/ConfirmDialog";
 import CartDetailService from "../../services/cartDetail.service";
 
-const CartDropdown = ({ showCartDropdown, setShowCartDropdown, customer }) => {
+const CartDropdown = ({
+  showCartDropdown,
+  setShowCartDropdown,
+  customer,
+  setCartNumber,
+}) => {
   const [cart, setCart] = useState();
   const [totalPrice, setTotalPrice] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -75,6 +80,7 @@ const CartDropdown = ({ showCartDropdown, setShowCartDropdown, customer }) => {
           (item) => item._id !== itemDelete
         );
         setCart(cart);
+        setCartNumber(cart.cartDetails.length);
         setShowConfirm(false);
         toast.success(TOAST_MESSAGE.success.delete, configToast);
       })
@@ -131,9 +137,12 @@ const CartDropdown = ({ showCartDropdown, setShowCartDropdown, customer }) => {
                       {cart.cartDetails.map((item, index) => (
                         <li className="cart-item" key={index}>
                           <div className="item-img">
-                            <a href={undefined}>
+                            <Link
+                              to={"/" + item.product.path}
+                              onClick={() => setShowCartDropdown(false)}
+                            >
                               <img src={item.color.images[0].picture} />
-                            </a>
+                            </Link>
                             <button
                               className="close-btn"
                               onClick={() => deleteCartDetail(item._id)}
@@ -143,12 +152,13 @@ const CartDropdown = ({ showCartDropdown, setShowCartDropdown, customer }) => {
                           </div>
                           <div className="item-content">
                             <h3 className="item-title">
-                              <a
-                                href="single-product-3.html"
+                              <Link
+                                to={"/" + item.product.path}
+                                onClick={() => setShowCartDropdown(false)}
                                 className="font-bold"
                               >
                                 {item.product.productName}
-                              </a>
+                              </Link>
                             </h3>
                             <div
                               className="item-price italic font-bold"
@@ -170,13 +180,12 @@ const CartDropdown = ({ showCartDropdown, setShowCartDropdown, customer }) => {
                                     ).toLocaleString()
                                 : item.color.price.toLocaleString()}{" "}
                             </div>
-                            <div className="pro-qty item-quantity">
+                            {/* <div className="pro-qty item-quantity">
                               <input
                                 type="number"
                                 className="quantity-input"
-                                // value="15"
                               />
-                            </div>
+                            </div> */}
                           </div>
                         </li>
                       ))}
@@ -277,18 +286,20 @@ const CartDropdown = ({ showCartDropdown, setShowCartDropdown, customer }) => {
                       </span>
                     </h3> */}
                     <div className="group-btn">
-                      <a
-                        href="cart.html"
+                      <Link
+                        to="/cart"
+                        onClick={() => setShowCartDropdown(false)}
                         className="axil-btn btn-bg-primary viewcart-btn"
                       >
                         Xem Giỏ Hàng
-                      </a>
-                      <a
-                        href="checkout.html"
+                      </Link>
+                      <Link
+                        to="/checkout"
+                        onClick={() => setShowCartDropdown(false)}
                         className="axil-btn btn-bg-secondary checkout-btn"
                       >
                         Thanh Toán
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </>

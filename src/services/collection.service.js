@@ -8,6 +8,10 @@ const search = (data) => {
   return http.post(`/collections/search`, data);
 };
 
+const getByPath = (data) => {
+  return http.post(`/collections/get-by-path`, data);
+};
+
 const getById = (id) => {
   return http.get(`/collections/${id}`);
 };
@@ -28,6 +32,7 @@ const CollectionService = {
   get,
   search,
   getById,
+  getByPath,
   create,
   update,
   remove,

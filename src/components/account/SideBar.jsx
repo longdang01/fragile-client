@@ -23,7 +23,8 @@ const SideBar = () => {
               <i className="fas fa-th-large"></i>
               <span>Bảng Điều Khiển</span>
             </Link>
-            <a
+            <Link
+              to="/account/orders"
               className={
                 "nav-item nav-link " +
                 (pathname == "/account/orders" ? "active" : "")
@@ -32,7 +33,7 @@ const SideBar = () => {
             >
               <i className="fas fa-shopping-basket"></i>
               <span>Theo Dõi Đơn Hàng</span>
-            </a>
+            </Link>
             <Link
               to="/account/delivery-address"
               className={

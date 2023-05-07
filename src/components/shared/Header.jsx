@@ -168,14 +168,14 @@ const Header = ({
                 <div className="header-top-link">
                   <ul className="quick-link">
                     <li>
-                      <a href="#">Trợ Giúp</a>
+                      <a href="#">Hỗ Trợ Mua Hàng</a>
                     </li>
-                    {customer && !loading && hasToken ? (
+                    {customerName && !loading && hasToken ? (
                       <>
                         <li className="text-sub font-bold">
                           <i className="fa-solid fa-hand"></i> Hi,{" "}
-                          {customer?.customer?.customerName}
-                          {/* {customerName} */}
+                          {/* {customer?.customer?.customerName} */}
+                          {customerName}
                         </li>
                       </>
                     ) : (
@@ -370,7 +370,7 @@ const Header = ({
                       </ul>
                     </li>
                     <li className="">
-                      <a href="#">Bộ Sưu Tập</a>
+                      <Link to="collection/all">Bộ Sưu Tập</Link>
                     </li>
                     <li>
                       <a href="about-us.html">Liên Hệ</a>

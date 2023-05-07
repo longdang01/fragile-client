@@ -557,6 +557,48 @@ const changePasswordModalValidator = (data) => {
     .validate(data, { abortEarly: false, allowUnknown: true });
 };
 
+const resetPasswordModalValidator = (data) => {
+  const schema = Joi.object().keys({
+    newPassword: Joi.string().min(3).required().messages({
+      "string.min": "Mật khẩu ít nhất 3 ký tự",
+      // "string.max": "Mật khẩu nhiều nhất 15 ký tự",
+    }),
+    newPasswordConfirm: Joi.string()
+      .equal(Joi.ref("newPassword")) // not empty because this line
+      .label("newPasswordConfirm")
+      .messages({ "any.only": "Nhập lại mật khẩu mới chưa chính xác" })
+      .required(),
+  });
+
+  return schema
+    .messages({
+      //   "string.base": `"a" should be a type of 'text'`,
+      //   "string.min": `"a" should have a minimum length of {#limit}`,
+      "string.empty": `Không được để trống`,
+      "any.required": `Bắt buộc phải nhập`,
+    })
+    .validate(data, { abortEarly: false, allowUnknown: true });
+};
+
+const emailModalValidator = (data) => {
+  const schema = Joi.object().keys({
+    email: Joi.string()
+      .email({ tlds: { allow: false } })
+      .messages({
+        "string.email": "Email không hợp lệ",
+      }),
+  });
+
+  return schema
+    .messages({
+      //   "string.base": `"a" should be a type of 'text'`,
+      //   "string.min": `"a" should have a minimum length of {#limit}`,
+      "string.empty": `Không được để trống`,
+      "any.required": `Bắt buộc phải nhập`,
+    })
+    .validate(data, { abortEarly: false, allowUnknown: true });
+};
+
 const profileModalValidator = (data) => {
   data.role = String(data.role);
 
@@ -665,4 +707,6 @@ export {
   userModalValidator,
   deliveryAddressModalValidator,
   changePasswordModalValidator,
+  emailModalValidator,
+  resetPasswordModalValidator,
 };

@@ -4,6 +4,14 @@ const get = () => {
   return http.get(`/products`);
 };
 
+const getBestSeller = () => {
+  return http.get(`/products/get-best-seller`);
+};
+
+const getSale = () => {
+  return http.get(`/products/get-sale`);
+};
+
 const search = (data) => {
   return http.post(`/products/search`, data);
 };
@@ -35,6 +43,8 @@ const remove = (id) => {
 const ProductService = {
   get,
   search,
+  getSale,
+  getBestSeller,
   getByClient,
   getByPath,
   getById,

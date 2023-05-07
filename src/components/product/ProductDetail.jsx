@@ -20,7 +20,10 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
 import "./Product.scss";
 
 const ProductDetail = () => {
-  const [customer, cartNumber, setCartNumber, loading] = useOutletContext();
+  const { customer, setCustomer, cartNumber, setCartNumber } =
+    useOutletContext();
+  // const { cartNumber, setCartNumber } = useOutletContext();
+
   const { path } = useParams();
   const swiperRef = useRef(null);
 
@@ -151,6 +154,7 @@ const ProductDetail = () => {
           toast.success("Đã thêm vào giỏ hàng", configToast);
         })
         .catch((err) => {
+          console.log(err);
           setIsLoading(false);
           toast.error("Thêm thất bại", configToast);
         });

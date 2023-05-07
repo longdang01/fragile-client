@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from "react-router-dom";
 import { getErrors, showError, catchErrors } from "../../common/Error";
 import { userModalValidator } from "../../common/Validation";
 import { useEffect } from "react";
@@ -13,89 +18,56 @@ import fragile_brand from "../../assets/images/fragile-brand.jpg";
 import "./User.scss";
 import Breadcrumb from "../shared/Breadcrumb";
 
-const Login = () => {
-  const initData = { username: "", password: "" };
-  const [user, setUser] = useState(initData);
-  const [isLoading, setIsLoading] = useState(false);
-  let navigate = useNavigate();
-  const { loading, setLoading } = useOutletContext();
-  // validate
-  let [errors, setErrors] = useState([]);
-  const [labelInputs, setLabelInputs] = useState([]);
-
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-
-    setLabelInputs([name]);
-    setUser({ ...user, [name]: value });
-  };
-
-  const login = () => {
-    const validate = userModalValidator(user);
-
-    if (validate.error) {
-      const errors = getErrors(validate);
-      setErrors(errors);
-    }
-
-    if (!validate.error) {
-      setIsLoading(true);
-      // setLoading(true);
-
-      UserService.login({ user, page: 2 })
-        .then((res) => {
-          const user = res.data.user;
-
-          if (user.role == 5 && res.data.customer) {
-            localStorage.setItem("TOKEN", user.token);
-            localStorage.setItem("ROLE", 5);
-            // localStorage.setItem("STAFF", JSON.stringify(res.data.staff));
-            localStorage.setItem("CUSTOMER", JSON.stringify(res.data.customer));
-
-            toast.success("Đăng nhập thành công !", configToast);
-            navigate("/");
-          }
-          setIsLoading(false);
-
-          // else {
-          //   toast.error("Đăng nhập không thành công !", configToast);
-          //   return;
-          // }
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          toast.error(err.response.data.message, configToast);
-        });
-    }
-  };
+const VerifyAccount = () => {
+  const { customer, setCustomer, cartNumber, setCartNumber } =
+    useOutletContext();
+  const { id, token } = useParams();
 
   // catch error when change input
   useEffect(() => {
-    const validate = userModalValidator(user);
-    setErrors(catchErrors(labelInputs, validate, errors));
-  }, [user]);
+    UserService.verifyAccount({
+      id: id,
+      token: token,
+    })
+      .then((res) => {
+        // toast.success("Xác minh thành công", configToast);
+
+        setTimeout(() => {
+          localStorage.removeItem("TOKEN");
+          localStorage.removeItem("ROLE");
+          localStorage.removeItem("CUSTOMER");
+          setCartNumber(0);
+          setCustomer(null);
+          // navigate("/login");
+        }, 1000);
+      })
+      .catch((err) => {
+        // setIsLoading(false);
+        toast.error(err.response.data.message, configToast);
+      });
+  }, []);
 
   return (
     <>
       <div>
-        <Breadcrumb currentPage="Đăng Nhập" />
+        <Breadcrumb currentPage="Xác Minh Tài Khoản" />
 
         <div className="container">
           <div className="row flex justify-center">
             <div className="col-lg-6 col-md-8">
               <div className="user-container">
                 <div className="flex items-center justify-between ">
-                  <h1 className="title font-bold text-center mb-3">
-                    Đăng Nhập
-                  </h1>
+                  {/* <h1 className="title font-bold text-center mb-3">
+                    Xác Minh Tài Khoản
+                  </h1> */}
                 </div>
-                <span className="font-bold">Bạn chưa có tài khoản ? </span>
+                {/* <span className="font-bold">Bạn chưa có tài khoản ? </span>
                 <Link
                   to="/register"
                   className="text-black font-bold m-0 cursor-pointer"
                 >
                   Đăng Ký
-                </Link>
+                </Link> */}
                 {/* <div className="social-container">
                   <a href="#" className="social">
                     <i className="fab fa-facebook-f"></i>
@@ -108,7 +80,7 @@ const Login = () => {
               </a>
                 </div> */}
                 {/* <span>or use your account</span> */}
-                <div className="row mt-[45px]">
+                {/* <div className="row mt-[45px]">
                   <div className="col-lg-6 col-md-8">
                     <input
                       type="text"
@@ -155,10 +127,11 @@ const Login = () => {
                         )}
                     </small>
                   </div>
-                </div>
+                </div> */}
                 {/* <a href="#">Quên mật khẩu?</a> */}
                 <div>
-                  <button
+                  <h1>Xác Minh Tài Khoản Thành Công</h1>
+                  {/* <button
                     onClick={login}
                     className={
                       isLoading
@@ -168,30 +141,30 @@ const Login = () => {
                     disabled={isLoading}
                   >
                     Đăng Nhập
-                  </button>
+                  </button> */}
                 </div>
                 <div className="row flex items-center justify-between">
                   <div className="col-lg-6 col-md-8">
                     <div className="social-container">
-                      <a href="#" className="social">
+                      {/* <a href="#" className="social">
                         <i className="fab fa-facebook-f"></i>
                       </a>
                       <a href="#" className="social">
                         <i className="fab fa-google-plus-g"></i>
-                      </a>
+                      </a> */}
                       {/* <a href="#" className="social">
                         <i className="uil uil-user"></i>
                       </a> */}
                     </div>
                   </div>
-                  <div className="col-lg-6 col-md-8 text-end">
+                  {/* <div className="col-lg-6 col-md-8 text-end">
                     <Link
                       to="/forgot-password"
                       className="text-black font-bold mt-0 cursor-pointer"
                     >
                       Quên mật khẩu?
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -214,4 +187,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default VerifyAccount;

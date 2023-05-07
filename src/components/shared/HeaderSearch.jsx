@@ -121,9 +121,12 @@ const HeaderSearch = ({ showHeaderSearch, setShowHeaderSearch }) => {
                     products.map((product, index) => (
                       <div key={index} className="axil-product-list">
                         <div className="thumbnail">
-                          <a href="single-product.html">
+                          <Link
+                            to={"/" + product.path}
+                            onClick={() => setShowHeaderSearch(false)}
+                          >
                             <img src={product.colors[0].images[0].picture} />
-                          </a>
+                          </Link>
                         </div>
                         <div className="product-content">
                           {/* <div className="product-rating">
@@ -139,9 +142,12 @@ const HeaderSearch = ({ showHeaderSearch, setShowHeaderSearch }) => {
                             </span>
                           </div> */}
                           <h6 className="product-title">
-                            <a href="single-product.html mb-0">
+                            <Link
+                              to={"/" + product.path}
+                              onClick={() => setShowHeaderSearch(false)}
+                            >
                               {product.productName}
-                            </a>
+                            </Link>
                           </h6>
                           <div className="product-price-variant">
                             <span className="price current-price italic">
@@ -150,10 +156,14 @@ const HeaderSearch = ({ showHeaderSearch, setShowHeaderSearch }) => {
                             {/* <span className="price old-price">$49.99</span> */}
                           </div>
                           <div className="product-cart">
-                            <a href="cart.html" className="cart-btn mb-0">
+                            <Link
+                              to={"/" + product.path}
+                              onClick={() => setShowHeaderSearch(false)}
+                              className="cart-btn mb-0"
+                            >
                               <i className="uil uil-shopping-bag"></i>
                               {/* <i className="fal fa-shopping-cart"></i> */}
-                            </a>
+                            </Link>
                             {/* <a href="wishlist.html" className="cart-btn">
                               <i className="fal fa-heart"></i>
                             </a> */}

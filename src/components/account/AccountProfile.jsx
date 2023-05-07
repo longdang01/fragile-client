@@ -16,8 +16,8 @@ import avt from "../../assets/images/avt.jpg";
 const TITLE = "Thông Tin Cá Nhân";
 
 const AccountProfile = (props) => {
-  const [customer, setCustomer] = useOutletContext();
-
+  const { customer, setCustomer, customerName, setCustomerName } =
+    useOutletContext();
   const initData = {
     _id: "",
     user: "",
@@ -80,14 +80,16 @@ const AccountProfile = (props) => {
   };
 
   const updateProfile = (id, profile) => {
-    document
-      .querySelector(".header-top-link > .quick-link")
-      .classList.add("hidden");
+    // document
+    //   .querySelector(".header-top-link > .quick-link")
+    //   .classList.add("hidden");
 
     CustomerService.update(id, profile)
       .then((res) => {
-        customer.customer.customerName = res.data.customerName;
-        setCustomer(null);
+        setCustomerName(res.data.customerName);
+        // customer.customer.customerName = res.data.customerName;
+        // setCustomer(null);
+
         // if (res.data) setCustomer(res.data);
         res.data.username = res.data.user?.username;
         res.data.password = res.data.user?.password;
@@ -97,11 +99,11 @@ const AccountProfile = (props) => {
         if (ref.current) ref.current.value = "";
         setImage(initImage);
         setIsLoading(false);
-        setTimeout(() => {
-          document
-            .querySelector(".header-top-link > .quick-link")
-            .classList.remove("hidden");
-        }, 1000);
+        // setTimeout(() => {
+        //   document
+        //     .querySelector(".header-top-link > .quick-link")
+        //     .classList.remove("hidden");
+        // }, 1000);
         toast.success(TOAST_MESSAGE.success.update, configToast);
       })
       .catch((err) => {

@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Hero from "./Hero";
+import BestSeller from "./BestSeller";
+import Sale from "./Sale";
 
 const TITLE = "Trang Chủ";
 const TITLE_NAME = "Trang Chủ";
 
 const Home = () => {
-  const [loading, setLoading] = useOutletContext();
+  const { loading, setLoading } = useOutletContext();
 
   return (
     <>
@@ -24,6 +26,8 @@ const Home = () => {
       </HelmetProvider>
 
       <Hero />
+      <BestSeller />
+      <Sale />
       {/* {/* <!-- Start Slider Area --> */}
       {/* <div className="axil-main-slider-area main-slider-style-3">
         <div className="container">

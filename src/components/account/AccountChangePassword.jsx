@@ -19,7 +19,8 @@ import "./Account.scss";
 
 const TITLE = "Đổi Mật Khẩu";
 const AccountChangePassword = () => {
-  const [customer, setCustomer, cartNumber, setCartNumber] = useOutletContext();
+  const { customer, setCustomer, cartNumber, setCartNumber } =
+    useOutletContext();
   let navigate = useNavigate();
 
   const initData = {

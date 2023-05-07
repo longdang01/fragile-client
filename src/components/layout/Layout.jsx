@@ -17,6 +17,7 @@ const Layout = () => {
   const [showHeaderSearch, setShowHeaderSearch] = useState(false);
   const [categories, setCategories] = useState([]);
   const [customer, setCustomer] = useState();
+  const [customerName, setCustomerName] = useState();
   const [cartNumber, setCartNumber] = useState();
 
   const hasToken = localStorage.getItem("TOKEN");
@@ -24,6 +25,7 @@ const Layout = () => {
   const getCustomer = async () => {
     const data = hasToken && (await UserService.getMe());
     setCustomer(data && data.data);
+    setCustomerName(data && data.data.customer?.customerName);
   };
 
   const getCategories = () => {
@@ -48,7 +50,7 @@ const Layout = () => {
       customer: customer.customer?._id,
     })
       .then((res) => {
-        setCartNumber(res.data.cartDetails.length);
+        setCartNumber(res.data?.cartDetails.length);
       })
       .catch((err) => {
         console.log(err);
@@ -60,6 +62,10 @@ const Layout = () => {
     getCustomer();
   }, [hasToken, customer?.customer?.customerName]);
 
+  // useEffect(() => {
+  //   if (customer) getCart();
+  //   // else setCartNumber(0);
+  // }, [customer, cartNumber]);
   useEffect(() => {
     if (customer) getCart();
     // else setCartNumber(0);
@@ -86,6 +92,7 @@ const Layout = () => {
             setCartNumber={(num) => setCartNumber(num)}
             categories={categories}
             cartNumber={cartNumber}
+            customerName={customerName}
             loading={loading}
             setLoading={(state) => setLoading(state)}
             customer={customer}
@@ -93,42 +100,48 @@ const Layout = () => {
           {/*  End Header */}
           <main className="main-wrapper">
             <Outlet
-              context={[
+              // context={[
+              //   customer,
+              //   setCustomer,
+              //   cartNumber,
+              //   setCartNumber,
+              //   loading,
+              //   setLoading,
+              // ]}
+              context={{
                 customer,
                 setCustomer,
                 cartNumber,
                 setCartNumber,
+                customerName,
+                setCustomerName,
                 loading,
                 setLoading,
-              ]}
+              }}
               // setLoading={(loading) => setLoading(loading)}
               // loading={loading}
             />
           </main>
-
           {/* Start Footer Area  */}
-          <Footer />
-          {/* End Footer Area  */}
 
+          <Footer customer={customer} />
+          {/* End Footer Area  */}
           {/* Product Quick View Modal Start  */}
           {/* Product Quick View Modal End  */}
-
           {/* Header Search Modal Start */}
-
           {/* Header Search Modal End */}
           <HeaderSearch
             showHeaderSearch={showHeaderSearch}
             setShowHeaderSearch={(state) => setShowHeaderSearch(state)}
           />
-
           {/* Cart Dropdown Modal Start */}
           <CartDropdown
+            setCartNumber={(num) => setCartNumber(num)}
             showCartDropdown={showCartDropdown}
             customer={customer}
             setShowCartDropdown={(state) => setShowCartDropdown(state)}
           />
           {/* Cart Dropdown Modal End */}
-
           <ToastContainer
             position="top-right"
             autoClose={5000}

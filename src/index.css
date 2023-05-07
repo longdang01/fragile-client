@@ -552,3 +552,48 @@ small {
 .hidden {
   visibility: hidden !important;
 }
+
+.axil-order-summery.order-checkout-summery .summery-table-wrap {
+  padding: 0 !important;
+  background: inherit !important;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+  background: var(--color-primary) !important;
+  outline: var(--color-primary) !important;
+  box-shadow: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.footer-dark,
+.header-style-5 .axil-header-top {
+  background: #171718 !important;
+}
+
+.footer-dark .copyright-default .quick-link li a {
+  font-weight: bold !important;
+  text-transform: capitalize !important;
+}
+
+.footer-dark .axil-footer-widget .inner ul li a {
+  font-weight: bold;
+  font-style: italic !important;
+  display: inline-flex;
+  align-items: center;
+}
+
+.main-wrapper {
+  min-height: 100vh;
+}
+
+.header-style-5 .header-top-link .quick-link li a,
+.header-style-5 .header-top-dropdown .dropdown .dropdown-toggle {
+  font-weight: bold;
+}
+
+.product-action-wrapper .product-action .add-to-cart {
+  margin-top: 0;
+}

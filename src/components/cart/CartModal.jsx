@@ -19,7 +19,7 @@ import SizeService from "../../services/size.service";
 import CartDetailService from "../../services/cartDetail.service";
 
 const CartModal = (props) => {
-  const [customer] = useOutletContext();
+  const { customer } = useOutletContext();
 
   const { updateCartDetail, setIsLoading } = props;
   const [cartItem, setCartItem] = useState();
@@ -106,8 +106,8 @@ const CartModal = (props) => {
 
     if (
       variant &&
-      variant.color != props.cartItem.color._id &&
-      variant.size != props.cartItem.size._id
+      (variant.color != props.cartItem.color._id ||
+        variant.size != props.cartItem.size._id)
     ) {
       toast.error("Phân loại hàng đã có trong giỏ hàng", configToast);
       setIsLoading(false);

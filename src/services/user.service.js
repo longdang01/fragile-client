@@ -16,6 +16,18 @@ const changePassword = (data) => {
   return http.post(`/users/change-password`, data);
 };
 
+const forgotPassword = (data) => {
+  return http.post(`/users/forgot-password`, data);
+};
+
+const resetPassword = (data) => {
+  return http.post(`/users/reset-password`, data);
+};
+
+const verifyAccount = (data) => {
+  return http.post(`/users/verify-account`, data);
+};
+
 const getMe = () => {
   return http.get(`/users/me`);
 };
@@ -26,6 +38,9 @@ const UserService = {
   getMe,
   refreshToken,
   changePassword,
+  forgotPassword,
+  resetPassword,
+  verifyAccount,
 };
 
 export default UserService;

@@ -1,6 +1,6 @@
 import logo_white from "../../assets/images/logo-white.jpg";
-
-const Footer = () => {
+import { Link } from "react-router-dom";
+const Footer = ({ customer }) => {
   return (
     <>
       <footer className="axil-footer-area footer-style-1 footer-dark">
@@ -11,82 +11,41 @@ const Footer = () => {
               {/* Start Single Widget  */}
               <div className="col-md-3 col-sm-12">
                 <div className="axil-footer-widget">
-                  {/* <div className="logo mb--30">
-                    <a
-                      href="index.html"
-                      style={{ fontSize: "30px", lineHeight: "100%" }}
-                      className="font-bold text-[#fff]"
-                    >
-                    
-                      Fragile
-                    </a>
-                  </div> */}
-                  <h5 className="widget-title">FRAGILE</h5>
-
+                  <h5 className="widget-title">SUPPORT</h5>
                   <div className="inner">
                     <ul>
                       <li>
-                        <a href={undefined}>Facebook</a>
+                        <a href={undefined}>
+                          <i className="fa-brands fa-facebook mr-3"></i>Facebook
+                        </a>
                       </li>
                       <li>
-                        <a href={undefined}>Instagram</a>
-                      </li>
-                      {/* <li>
-                        <a href={undefined}>Tin Tức</a>
-                      </li>
-                      <li>
-                        <a href={undefined}>Lookbook</a>
+                        <a href={undefined}>
+                          <i className="fa-brands fa-instagram mr-3"></i>
+                          Instagram
+                        </a>
                       </li>
                       <li>
-                        <a href={undefined}>Liên Hệ</a>
-                      </li> */}
+                        <a href={undefined}>
+                          <i className="fa-brands fa-tiktok mr-3"></i>
+                          Tiktok
+                        </a>
+                      </li>
                     </ul>
                   </div>
-                  {/* <div className="inner">
-                    <p className="mb-5">
-                      Thị trấn Yên Mỹ <br />
-                      Huyện Yên Mỹ, <br />
-                      Tỉnh Hưng Yên.
-                    </p>
-                    <div className="social-share">
-                      <a href="#">
-                        <i className="fab fa-facebook-f"></i>
-                      </a>
-                      <a href="#">
-                        <i className="fab fa-instagram"></i>
-                      </a>
-                      <a href="#">
-                        <i className="fab fa-twitter"></i>
-                      </a>
-                      <a href="#">
-                        <i className="fab fa-linkedin-in"></i>
-                      </a>
-                      <a href="#">
-                        <i className="fab fa-discord"></i>
-                      </a>
-                    </div>
-                  </div> */}
                 </div>
               </div>
               {/* End Single Widget  */}
               {/* Start Single Widget  */}
               <div className="col-md-3 col-sm-4">
                 <div className="axil-footer-widget">
-                  <h5 className="widget-title">Về chúng tôi</h5>
+                  <h5 className="widget-title">ABOUT</h5>
                   <div className="inner">
                     <ul>
                       <li>
                         <a href={undefined}>Giới Thiệu</a>
                       </li>
-                      <li>
-                        <a href={undefined}>Cửa Hàng</a>
-                      </li>
-                      <li>
-                        <a href={undefined}>Tin Tức</a>
-                      </li>
-                      <li>
-                        <a href={undefined}>Lookbook</a>
-                      </li>
+
                       <li>
                         <a href={undefined}>Liên Hệ</a>
                       </li>
@@ -98,22 +57,38 @@ const Footer = () => {
               {/* Start Single Widget  */}
               <div className="col-md-3 col-sm-4">
                 <div className="axil-footer-widget">
-                  <h5 className="widget-title">Tài Khoản</h5>
+                  <h5 className="widget-title">ACCOUNT</h5>
                   <div className="inner">
                     <ul>
-                      <li>
-                        <a href={undefined}>Giúp Đỡ</a>
-                      </li>
-                      <li>
-                        <a href={undefined}>Giỏ Hàng</a>
-                      </li>
-                      <li>
-                        <a href={undefined}>Đăng Nhập</a>
-                      </li>
-                      <li>
-                        <a href={undefined}>Đăng Ký</a>
-                      </li>
-                      {/* <!-- <li><a href="shop.html">Shop</a></li> --> */}
+                      {customer ? (
+                        <>
+                          <li>
+                            <Link to="/account/profile">Tài Khoản Của Bạn</Link>
+                          </li>
+                          <li>
+                            <Link to="/account/orders">Theo Dõi Đơn Hàng</Link>
+                          </li>
+                          <li>
+                            <Link to="/account/delivery-address">
+                              Địa Chỉ Nhận Hàng
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to="/account/change-password">
+                              Đổi Mật Khẩu
+                            </Link>
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li>
+                            <Link to="/login">Đăng Nhập</Link>
+                          </li>
+                          <li>
+                            <Link to="/register">Đăng Ký</Link>
+                          </li>
+                        </>
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -122,14 +97,17 @@ const Footer = () => {
               {/* Start Single Widget  */}
               <div className="col-md-3 col-sm-4">
                 <div className="axil-footer-widget">
-                  <h5 className="widget-title">Hỗ Trợ</h5>
+                  <h5 className="widget-title">POLICY</h5>
                   <div className="inner">
                     <ul>
+                      <li>
+                        <a href={undefined}>Hỗ Trợ Mua Hàng</a>
+                      </li>
                       <li>
                         <a href={undefined}>Chính Sách Bảo Mật</a>
                       </li>
                       <li>
-                        <a href={undefined}>Điều Khoản Sử Dụng</a>
+                        <a href={undefined}>Chính Sách Sử Dụng</a>
                       </li>
                       <li>
                         <a href={undefined}>Câu Hỏi Thường Gặp</a>
@@ -155,11 +133,11 @@ const Footer = () => {
                       <a href="privacy-policy.html">Chính sách bảo mật</a>
                     </li>
                     <li>
-                      <a href="terms-of-service.html">Điều khoản dịch vụ</a>
+                      <a href="terms-of-service.html">Chính Sách Sử Dụng</a>
                     </li>
                   </ul>
                   <ul className="quick-link">
-                    <li>
+                    <li style={{ fontWeight: "bold" }}>
                       © {new Date().getFullYear()}. Bản quyền thuộc về{" "}
                       <a target="_blank" href="https://axilthemes.com/">
                         FRAGILE

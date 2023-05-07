@@ -4,17 +4,25 @@ import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Home from "./components/home/Home";
 import Cart from "./components/cart/Cart";
+import Checkout from "./components/checkout/Checkout";
 import Product from "./components/product/Product";
 import ProductDetail from "./components/product/ProductDetail";
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
+import ForgotPassword from "./components/user/ForgotPassword";
+import ResetPassword from "./components/user/ResetPassword";
+import VerifyAccount from "./components/user/VerifyAccount";
 import AccountDashboard from "./components/account/AccountDashboard";
 import AccountProfile from "./components/account/AccountProfile";
 import AccountChangePassword from "./components/account/AccountChangePassword";
 import AccountDeliveryAddress from "./components/account/AccountDeliveryAddress";
 import Account from "./components/account/Account";
+import OrdersDetail from "./components/orders/OrdersDetail";
+import Collection from "./components/collection/Collection";
+import CollectionDetail from "./components/collection/CollectionDetail";
 
 import AuthGuard from "./guard/AuthGuard";
+import AccountOrders from "./components/account/AccountOrders";
 
 function App() {
   return (
@@ -33,6 +41,13 @@ function App() {
             {/* <Route index element={<Dashboard />}></Route> */}
             <Route path="home" element={<Home />}></Route>
             <Route path="cart" element={<Cart />}></Route>
+            <Route path="checkout" element={<Checkout />}></Route>
+            <Route path="orders/:ordersCode" element={<OrdersDetail />}></Route>
+            <Route path="collection/all" element={<Collection />}></Route>
+            <Route
+              path="collection/:path"
+              element={<CollectionDetail />}
+            ></Route>
 
             <Route
               path="account"
@@ -56,6 +71,7 @@ function App() {
                 path="delivery-address"
                 element={<AccountDeliveryAddress />}
               ></Route>
+              <Route path="orders" element={<AccountOrders />}></Route>
             </Route>
 
             {/* routes search, get by category, subcategory */}
@@ -75,6 +91,12 @@ function App() {
             {/* routes auth login/register */}
             <Route path="login" element={<Login />}></Route>
             <Route path="register" element={<Register />}></Route>
+            <Route path="forgot-password" element={<ForgotPassword />}></Route>
+            <Route
+              path="reset-password/:id/:token"
+              element={<ResetPassword />}
+            ></Route>
+            <Route path="verify/:id/:token" element={<VerifyAccount />}></Route>
           </Route>
 
           {/* <Route path="not-found" element={<NotFound />}></Route> */}

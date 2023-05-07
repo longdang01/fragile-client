@@ -21,7 +21,7 @@ const ProductFilterCategory = ({ category }) => {
       {category && (
         <div className="container">
           <div className="product-area pb--50">
-            <div className="section-title-wrapper">
+            {/* <div className="section-title-wrapper">
               <span className="title-highlighter highlighter-secondary">
                 <i className="uil uil-store"></i>
                 {category.categoryName}
@@ -31,7 +31,7 @@ const ProductFilterCategory = ({ category }) => {
                 {document.querySelector(".category-active") &&
                   document.querySelector(".category-active").textContent}
               </h2>
-            </div>
+            </div> */}
             <div className="categrie-product-activation-3 slick-layout-wrapper--15 axil-slick-arrow  arrow-top-slide">
               <button
                 ref={navigationPrevRef}

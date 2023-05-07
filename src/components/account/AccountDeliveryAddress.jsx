@@ -13,7 +13,7 @@ import "./Account.scss";
 
 const TITLE = "Địa Chỉ Nhận Hàng";
 const AccountDeliveryAddress = () => {
-  const [customer] = useOutletContext();
+  const { customer } = useOutletContext();
 
   const [deliveryAddresses, setDeliveryAddresses] = useState([]);
   const [deliveryAddress, setDeliveryAddress] = useState({});
@@ -38,6 +38,7 @@ const AccountDeliveryAddress = () => {
   const getDeliveryAddresses = () => {
     DeliveryAddressService.search({
       searchData: searchData,
+      customer: customer?.customer?._id,
       // page: page,
       // pageSize: pageSize,
     })

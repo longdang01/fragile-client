@@ -26,14 +26,15 @@ const ProductList = ({ products }) => {
       {data && (
         <>
           <div>
-            <div className="section-title-wrapper">
+            {/* <div className="section-title-wrapper">
               <span className="title-highlighter highlighter-secondary">
                 <i className="uil uil-store"></i>Danh Sách Sản Phẩm
               </span>
               <h2 className="title font-bold italic">
                 Danh Sách Sản Phẩm Hiện Có
               </h2>
-            </div>
+              <hr />
+            </div> */}
             <div className="row row--15">
               {data &&
                 data.map((product, index) => (

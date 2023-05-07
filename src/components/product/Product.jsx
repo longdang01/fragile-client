@@ -83,7 +83,7 @@ const Product = () => {
               <div className="section-title-wrapper mb-[150px]">
                 <span
                   className="title-highlighter highlighter-secondary"
-                  style={{ color: "black", fontStyle: "italic" }}
+                  style={{ color: "black" }}
                 >
                   {/* <i className="uil uil-store"></i> */}
                   <i className="uil uil-search"></i>

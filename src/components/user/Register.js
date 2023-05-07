@@ -52,12 +52,16 @@ const Register = () => {
       UserService.register(user)
         .then((res) => {
           setIsLoading(false);
-          toast.success("Đăng ký tải khoản thành công!", configToast);
-          navigate("/login");
+          toast.success(
+            "Chúng tôi gửi email kích hoạt tài khoản trong hòm thư của bạn, vui lòng kiểm tra và kích hoạt tài khoản!",
+            configToast
+          );
+
+          // navigate("/login");
         })
         .catch((err) => {
           setIsLoading(false);
-          toast.error("Đăng ký tải khoản thất bại!", configToast);
+          toast.error(err.response.data.message, configToast);
         });
     }
   };

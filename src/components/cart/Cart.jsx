@@ -1,5 +1,10 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { useLocation, useParams, useOutletContext } from "react-router-dom";
+import {
+  useLocation,
+  useParams,
+  useOutletContext,
+  Link,
+} from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { TOAST_MESSAGE, PAGE_SIZE } from "../../common/Variable";
@@ -16,7 +21,9 @@ import "./Cart.scss";
 const TITLE = "Giỏ Hàng";
 const TITLE_NAME = "Giỏ Hàng";
 const Cart = () => {
-  const [customer, cartNumber, setCartNumber, loading] = useOutletContext();
+  const { customer, setCustomer, cartNumber, setCartNumber } =
+    useOutletContext();
+  // const [cartNumber, setCartNumber] = useOutletContext();
   const [cart, setCart] = useState();
   const [cartItem, setCartItem] = useState();
   const [totalPrice, setTotalPrice] = useState();
@@ -102,6 +109,7 @@ const Cart = () => {
           (item) => item._id !== itemDelete
         );
         setCart(cart);
+        setCartNumber(cartNumber - 1);
         setShowConfirm(false);
         toast.success(TOAST_MESSAGE.success.delete, configToast);
       })
@@ -121,6 +129,7 @@ const Cart = () => {
     handleCalcTotalPrice();
     setTotalItem(cart?.cartDetails.filter((item) => item.active == 1).length);
   }, [cart?.cartDetails]);
+
   return (
     <>
       <HelmetProvider>
@@ -183,12 +192,14 @@ const Cart = () => {
                     {cart.cartDetails.map((item, index) => (
                       <tr key={index}>
                         <td className="product-thumbnail">
-                          <a href={undefined}>
+                          <Link to={"/" + item.product.path}>
                             <img src={item.color.images[0].picture} />
-                          </a>
+                          </Link>
                         </td>
                         <td className="product-title">
-                          <a href={undefined}>{item.product.productName}</a>
+                          <Link to={"/" + item.product.path}>
+                            {item.product.productName}
+                          </Link>
                           <div
                             style={{
                               fontStyle: "italic",
@@ -292,12 +303,12 @@ const Cart = () => {
                         </tbody>
                       </table>
                     </div>
-                    <a
-                      href={undefined}
+                    <Link
+                      to={"/checkout"}
                       className="axil-btn btn-bg-primary checkout-btn cursor-pointer"
                     >
                       Tiến hành thanh toán
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
