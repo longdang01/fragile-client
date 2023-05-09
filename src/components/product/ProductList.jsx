@@ -2,7 +2,9 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { PAGE_SIZE } from "../../common/Variable";
 import Pagination from "../../utils/pagination/Pagination";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
+const TITLE = "Cửa Hàng";
 const ProductList = ({ products }) => {
   const pageSize = PAGE_SIZE;
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,6 +25,18 @@ const ProductList = ({ products }) => {
 
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <meta charset="utf-8" />
+          <link rel="icon" href="/favicon.ico" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000" />
+          <title>
+            {TITLE + " / Fragile - Thương Hiệu Thời Trang Việt Nam"}
+          </title>
+        </Helmet>
+      </HelmetProvider>
+
       {data && (
         <>
           <div>

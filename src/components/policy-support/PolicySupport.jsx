@@ -9,8 +9,9 @@ import { useState, useEffect, useRef } from "react";
 
 import Breadcrumb from "../shared/Breadcrumb";
 import SideBar from "./SideBar";
+import "./PolicySupport.scss";
 
-const Account = () => {
+const PolicySupport = () => {
   const {
     customer,
     setCustomer,
@@ -25,7 +26,7 @@ const Account = () => {
   });
   return (
     <>
-      <Breadcrumb currentPage="Tài Khoản" />
+      <Breadcrumb currentPage="Chính Sách & Hỗ Trợ" />
       <div className="axil-dashboard-area axil-section-gap">
         <div className="container">
           <div className="axil-dashboard-warp">
@@ -43,10 +44,7 @@ const Account = () => {
             <div className="row">
               <div className="col-xl-3 col-md-4">
                 {/* <app-sidebar></app-sidebar> */}
-                <SideBar
-                  setCustomer={setCustomer}
-                  setCartNumber={setCartNumber}
-                />
+                <SideBar />
               </div>
               <div className="col-xl-9 col-md-8">
                 <Outlet
@@ -69,4 +67,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default PolicySupport;

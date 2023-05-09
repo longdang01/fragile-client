@@ -1,0 +1,45 @@
+.introduce-page {
+  .about-content-item {
+    height: 400px;
+
+    .thumbnail {
+      border-radius: 20px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
+      //   border: 1px solid #c2c2c2;
+
+      img {
+        height: 400px;
+        object-fit: cover;
+        border: 1px solid #d6d6d6;
+      }
+    }
+
+    .content-right {
+      padding: 30px;
+      border: 1px solid #d6d6d6;
+      height: 400px;
+      border-radius: 20px;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
+    }
+  }
+
+  .about-info-box {
+    border: 1px solid #d6d6d6;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
+    min-height: 320px;
+    img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+    }
+  }
+}
+
+.contact-page {
+  .contact-socials {
+    li a {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+}

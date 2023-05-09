@@ -5,6 +5,7 @@ import { TOAST_MESSAGE, PAGE_SIZE } from "../../common/Variable";
 import { configToast } from "../../config/ConfigUI";
 import ProductService from "../../services/product.service";
 import CartDetailService from "../../services/cartDetail.service";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,6 +19,8 @@ import "swiper/css/thumbs";
 // import required modules
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import "./Product.scss";
+
+const TITLE = "Chi Tiết Sản Phẩm";
 
 const ProductDetail = () => {
   const { customer, setCustomer, cartNumber, setCartNumber } =
@@ -173,6 +176,17 @@ const ProductDetail = () => {
 
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <meta charset="utf-8" />
+          <link rel="icon" href="/favicon.ico" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000" />
+          <title>
+            {TITLE + " / Fragile - Thương Hiệu Thời Trang Việt Nam"}
+          </title>
+        </Helmet>
+      </HelmetProvider>
       {product && color && (
         <div className="axil-single-product-area axil-section-gap pb--0 bg-color-white product-detail-wrap">
           <div className="single-product-thumb mb--40">

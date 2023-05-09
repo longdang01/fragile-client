@@ -106,7 +106,7 @@ const Header = ({
                   </div> */}
                   <div className="dropdown">
                     <button
-                      className="dropdown-toggle"
+                      className="dropdown-toggle italic"
                       type="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
@@ -168,7 +168,9 @@ const Header = ({
                 <div className="header-top-link">
                   <ul className="quick-link">
                     <li>
-                      <a href="#">Hỗ Trợ Mua Hàng</a>
+                      <Link to="/support/purchase" className="italic">
+                        Hỗ Trợ Mua Hàng
+                      </Link>
                     </li>
                     {customerName && !loading && hasToken ? (
                       <>
@@ -373,7 +375,10 @@ const Header = ({
                       <Link to="collection/all">Bộ Sưu Tập</Link>
                     </li>
                     <li>
-                      <a href="about-us.html">Liên Hệ</a>
+                      <Link to="/about/introduce">Giới Thiệu</Link>
+                    </li>
+                    <li>
+                      <Link to="/about/contact">Liên Hệ</Link>
                     </li>
                   </ul>
                 </nav>

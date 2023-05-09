@@ -15,7 +15,7 @@ const ConfirmDialog = (props) => {
         isLoading={props.isLoading}
         isDialog={true}
       >
-        <div className="font-bold">Bạn có chắc chắn xóa không?</div>
+        <div className="font-bold italic">Bạn có chắc chắn xóa không?</div>
       </Modal>
     </>
   );

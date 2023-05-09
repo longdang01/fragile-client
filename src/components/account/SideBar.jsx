@@ -3,11 +3,23 @@ import {
   useParams,
   useOutletContext,
   Link,
+  useNavigate,
 } from "react-router-dom";
 import "./SideBar.scss";
 
-const SideBar = () => {
+const SideBar = ({ setCartNumber, setCustomer }) => {
   const { pathname } = useLocation();
+  let navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("TOKEN");
+    localStorage.removeItem("ROLE");
+    localStorage.removeItem("CUSTOMER");
+    setCartNumber(0);
+    setCustomer(null);
+    navigate("/login");
+  };
+
   return (
     <>
       <aside className="axil-dashboard-aside">
@@ -62,12 +74,14 @@ const SideBar = () => {
                 (pathname == "/account/change-password" ? "active" : "")
               }
             >
-              <i className="fas fa-user"></i>
+              <i className="fa-solid fa-key"></i>
               <span>Đổi Mật Khẩu</span>
             </Link>
-            <a className="nav-item nav-link" href={undefined}>
-              {/* <i className="fal fa-sign-out"></i> */}
-              {/* <i className="uil uil-sign-out-alt"></i> */}
+            <a
+              className="nav-item nav-link cursor-pointer"
+              href={undefined}
+              onClick={logout}
+            >
               <i className="fa-solid fa-right-from-bracket"></i>
               <span>Đăng Xuất</span>
             </a>

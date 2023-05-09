@@ -17,12 +17,18 @@ import AccountProfile from "./components/account/AccountProfile";
 import AccountChangePassword from "./components/account/AccountChangePassword";
 import AccountDeliveryAddress from "./components/account/AccountDeliveryAddress";
 import Account from "./components/account/Account";
+import PolicySupport from "./components/policy-support/PolicySupport";
 import OrdersDetail from "./components/orders/OrdersDetail";
 import Collection from "./components/collection/Collection";
 import CollectionDetail from "./components/collection/CollectionDetail";
-
+import Introduce from "./components/about/Introduce";
+import Contact from "./components/about/Contact";
 import AuthGuard from "./guard/AuthGuard";
 import AccountOrders from "./components/account/AccountOrders";
+import SupportPurchase from "./components/policy-support/SupportPurchase";
+import SupportFaq from "./components/policy-support/SupportFaq";
+import PolicyPrivacy from "./components/policy-support/PolicyPrivacy";
+import PolicyUsage from "./components/policy-support/PolicyUsage";
 
 function App() {
   return (
@@ -42,6 +48,8 @@ function App() {
             <Route path="home" element={<Home />}></Route>
             <Route path="cart" element={<Cart />}></Route>
             <Route path="checkout" element={<Checkout />}></Route>
+            <Route path="about/introduce" element={<Introduce />}></Route>
+            <Route path="about/contact" element={<Contact />}></Route>
             <Route path="orders/:ordersCode" element={<OrdersDetail />}></Route>
             <Route path="collection/all" element={<Collection />}></Route>
             <Route
@@ -72,6 +80,16 @@ function App() {
                 element={<AccountDeliveryAddress />}
               ></Route>
               <Route path="orders" element={<AccountOrders />}></Route>
+            </Route>
+
+            <Route path="support" element={<PolicySupport />}>
+              <Route path="purchase" element={<SupportPurchase />}></Route>
+              <Route path="faq" element={<SupportFaq />}></Route>
+            </Route>
+
+            <Route path="policy" element={<PolicySupport />}>
+              <Route path="privacy" element={<PolicyPrivacy />}></Route>
+              <Route path="usage" element={<PolicyUsage />}></Route>
             </Route>
 
             {/* routes search, get by category, subcategory */}

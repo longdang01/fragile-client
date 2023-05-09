@@ -1,0 +1,25 @@
+.axil-dashboard-aside {
+  padding: 30px 20px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 0px 0px rgba(0, 0, 0, 0.22);
+  border-radius: 8px;
+
+  .nav-link {
+    margin-bottom: 15px;
+    // background: black;
+    color: black;
+    cursor: pointer;
+
+    i {
+      font-size: 14px;
+    }
+
+    &.active {
+      background: black;
+      color: #fff;
+    }
+  }
+
+  .nav-link:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -82,6 +82,7 @@ const OrdersDetail = () => {
           </title>
         </Helmet>
       </HelmetProvider>
+
       <Breadcrumb currentPage="Chi Tiết Đơn Hàng" />
 
       {orders && (
@@ -102,7 +103,7 @@ const OrdersDetail = () => {
                           ).toLocaleString() + " VND"}
                         </div>
                         <p className="description mb--40">
-                          Note: {orders.note}
+                          {orders.note && "Note: " + orders.note}
                         </p>
                         <div className="product-action-wrapper d-flex-center">
                           {/* <ul className="product-action action-style-two d-flex-center mb--0">

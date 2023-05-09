@@ -43,11 +43,11 @@ const Footer = ({ customer }) => {
                   <div className="inner">
                     <ul>
                       <li>
-                        <a href={undefined}>Giới Thiệu</a>
+                        <Link to="/about/introduce">Giới Thiệu</Link>
                       </li>
 
                       <li>
-                        <a href={undefined}>Liên Hệ</a>
+                        <Link to="/about/contact">Liên Hệ</Link>
                       </li>
                     </ul>
                   </div>
@@ -101,16 +101,16 @@ const Footer = ({ customer }) => {
                   <div className="inner">
                     <ul>
                       <li>
-                        <a href={undefined}>Hỗ Trợ Mua Hàng</a>
+                        <Link to="/support/purchase">Hỗ Trợ Mua Hàng</Link>
                       </li>
                       <li>
-                        <a href={undefined}>Chính Sách Bảo Mật</a>
+                        <Link to="/support/faq">Câu Hỏi Thường Gặp</Link>
                       </li>
                       <li>
-                        <a href={undefined}>Chính Sách Sử Dụng</a>
+                        <Link to="/policy/privacy">Chính Sách Bảo Mật</Link>
                       </li>
                       <li>
-                        <a href={undefined}>Câu Hỏi Thường Gặp</a>
+                        <Link to="/policy/usage">Chính Sách Sử Dụng</Link>
                       </li>
                       {/* <!-- <li><a href="contact.html">Contact</a></li> --> */}
                     </ul>
@@ -130,16 +130,16 @@ const Footer = ({ customer }) => {
                 <div className="copyright-left d-flex flex-wrap justify-content-xl-start justify-content-center">
                   <ul className="quick-link">
                     <li>
-                      <a href="privacy-policy.html">Chính sách bảo mật</a>
+                      <Link to="/policy/privacy">Chính sách bảo mật</Link>
                     </li>
                     <li>
-                      <a href="terms-of-service.html">Chính Sách Sử Dụng</a>
+                      <Link to="/policy/usage">Chính Sách Sử Dụng</Link>
                     </li>
                   </ul>
                   <ul className="quick-link">
                     <li style={{ fontWeight: "bold" }}>
                       © {new Date().getFullYear()}. Bản quyền thuộc về{" "}
-                      <a target="_blank" href="https://axilthemes.com/">
+                      <a target="_blank" href="#">
                         FRAGILE
                       </a>
                       .

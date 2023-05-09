@@ -22,6 +22,7 @@ const VerifyAccount = () => {
   const { customer, setCustomer, cartNumber, setCartNumber } =
     useOutletContext();
   const { id, token } = useParams();
+  const [status, setStatus] = useState(false);
 
   // catch error when change input
   useEffect(() => {
@@ -31,8 +32,8 @@ const VerifyAccount = () => {
     })
       .then((res) => {
         // toast.success("Xác minh thành công", configToast);
-
         setTimeout(() => {
+          setStatus(true);
           localStorage.removeItem("TOKEN");
           localStorage.removeItem("ROLE");
           localStorage.removeItem("CUSTOMER");
@@ -53,122 +54,11 @@ const VerifyAccount = () => {
         <Breadcrumb currentPage="Xác Minh Tài Khoản" />
 
         <div className="container">
-          <div className="row flex justify-center">
-            <div className="col-lg-6 col-md-8">
-              <div className="user-container">
-                <div className="flex items-center justify-between ">
-                  {/* <h1 className="title font-bold text-center mb-3">
-                    Xác Minh Tài Khoản
-                  </h1> */}
-                </div>
-                {/* <span className="font-bold">Bạn chưa có tài khoản ? </span>
-                <Link
-                  to="/register"
-                  className="text-black font-bold m-0 cursor-pointer"
-                >
-                  Đăng Ký
-                </Link> */}
-                {/* <div className="social-container">
-                  <a href="#" className="social">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a href="#" className="social">
-                    <i className="fab fa-google-plus-g"></i>
-                  </a>
-                  <a href="#" className="social">
-                <i className="fab fa-linkedin-in"></i>
-              </a>
-                </div> */}
-                {/* <span>or use your account</span> */}
-                {/* <div className="row mt-[45px]">
-                  <div className="col-lg-6 col-md-8">
-                    <input
-                      type="text"
-                      name="username"
-                      className={
-                        "form-control " +
-                        (showError(errors, "username")
-                          ? "border-[#FF0000] focusError"
-                          : "")
-                      }
-                      placeholder="Username"
-                      onChange={handleInput}
-                      value={user.username}
-                    />
-                    <small className="text-red-600 font-bold">
-                      {showError(errors, "username") &&
-                        showError(errors, "username").messages.map(
-                          (message, index) => (
-                            <div key={index}>&bull; {message}</div>
-                          )
-                        )}
-                    </small>
-                  </div>
-                  <div className="col-lg-6 col-md-8">
-                    <input
-                      type="password"
-                      name="password"
-                      className={
-                        "form-control " +
-                        (showError(errors, "password")
-                          ? "border-[#FF0000] focusError"
-                          : "")
-                      }
-                      placeholder="Mật khẩu"
-                      onChange={handleInput}
-                      value={user.password}
-                    />
-                    <small className="text-red-600 font-bold">
-                      {showError(errors, "password") &&
-                        showError(errors, "password").messages.map(
-                          (message, index) => (
-                            <div key={index}>&bull; {message}</div>
-                          )
-                        )}
-                    </small>
-                  </div>
-                </div> */}
-                {/* <a href="#">Quên mật khẩu?</a> */}
-                <div>
-                  <h1>Xác Minh Tài Khoản Thành Công</h1>
-                  {/* <button
-                    onClick={login}
-                    className={
-                      isLoading
-                        ? "button button-contactForm btn-block bg-[#5869da] button__loading loading capitalize"
-                        : "button button-contactForm btn-block bg-[#5869da] button__loading capitalize"
-                    }
-                    disabled={isLoading}
-                  >
-                    Đăng Nhập
-                  </button> */}
-                </div>
-                <div className="row flex items-center justify-between">
-                  <div className="col-lg-6 col-md-8">
-                    <div className="social-container">
-                      {/* <a href="#" className="social">
-                        <i className="fab fa-facebook-f"></i>
-                      </a>
-                      <a href="#" className="social">
-                        <i className="fab fa-google-plus-g"></i>
-                      </a> */}
-                      {/* <a href="#" className="social">
-                        <i className="uil uil-user"></i>
-                      </a> */}
-                    </div>
-                  </div>
-                  {/* <div className="col-lg-6 col-md-8 text-end">
-                    <Link
-                      to="/forgot-password"
-                      className="text-black font-bold mt-0 cursor-pointer"
-                    >
-                      Quên mật khẩu?
-                    </Link>
-                  </div> */}
-                </div>
-              </div>
-            </div>
-          </div>
+          {status ? (
+            <h1 className="font-bold italic">Xác Minh Tài Khoản Thành Công!</h1>
+          ) : (
+            <h1 className="font-bold italic">Xác Minh Tài Khoản Thất Bại!</h1>
+          )}
         </div>
       </div>
       {/* <ToastContainer
