@@ -133,7 +133,7 @@ const Hero = () => {
                         )}
                         <div className="main-slider-thumb">
                           <img
-                            srcSet={slide.picture + " 2x"}
+                            src={slide.picture}
                             alt="Product"
                             className="object-cover"
                           />

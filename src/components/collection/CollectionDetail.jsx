@@ -154,7 +154,7 @@ const CollectionDetail = () => {
                               <div className="single-slide slick-slide w-full">
                                 <div className="main-slider-thumb">
                                   <img
-                                    srcSet={image.picture + " 2x"}
+                                    src={image.picture}
                                     alt="Product"
                                     className="object-cover"
                                   />
