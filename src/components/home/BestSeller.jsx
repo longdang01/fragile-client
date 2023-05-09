@@ -28,23 +28,23 @@ const BestSeller = () => {
 
   return (
     <>
-      <div className="best-seller-page">
-        <div className="axil-product-area bg-color-white axil-section-gap pb--0">
-          <div className="container">
-            <div className="product-area pb--20">
-              <div className="axil-isotope-wrapper">
-                <div className="product-isotope-heading">
-                  <div className="section-title-wrapper">
-                    <span className="title-highlighter highlighter-primary">
-                      <i className="fa-solid fa-bag-shopping"></i> Sản phẩm Bán
-                      Chạy
-                    </span>
-                    <h2 className="title">BEST SELLER</h2>
+      {products && (
+        <div className="best-seller-page">
+          <div className="axil-product-area bg-color-white axil-section-gap pb--0">
+            <div className="container">
+              <div className="product-area pb--20">
+                <div className="axil-isotope-wrapper">
+                  <div className="product-isotope-heading">
+                    <div className="section-title-wrapper">
+                      <span className="title-highlighter highlighter-primary">
+                        <i className="fa-solid fa-bag-shopping"></i> Sản phẩm
+                        Bán Chạy
+                      </span>
+                      <h2 className="title">BEST SELLER</h2>
+                    </div>
                   </div>
-                </div>
-                <div className="row row--15" style={{ height: "auto" }}>
-                  {products &&
-                    products.map((product, index) => (
+                  <div className="row row--15" style={{ height: "auto" }}>
+                    {products.map((product, index) => (
                       <div
                         key={index}
                         current-page="currentPage"
@@ -260,12 +260,13 @@ const BestSeller = () => {
                         </div>
                       </div>
                     ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
