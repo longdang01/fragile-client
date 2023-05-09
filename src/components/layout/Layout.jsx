@@ -72,8 +72,9 @@ const Layout = () => {
   }, [customer, cartNumber]);
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 1000);
+    // setLoading(true);
+    // setTimeout(() => setLoading(false), 1000);
+    setLoading(false);
   }, [pathname]);
 
   return (
@@ -85,6 +86,7 @@ const Layout = () => {
           {/* <p className="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p> */}
           {/* <a href="#top" className="back-to-top" id="backto-top"><i className="fal fa-arrow-up"></i></a> */}
           {/* Start Header */}
+
           <Header
             setShowCartDropdown={(state) => setShowCartDropdown(state)}
             setShowHeaderSearch={(state) => setShowHeaderSearch(state)}

@@ -47,6 +47,23 @@ const ProductFilterCategory = ({ category }) => {
                   prevEl: navigationPrevRef.current,
                   nextEl: navigationNextRef.current,
                 }}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 3,
+                  },
+                  576: {
+                    // width: 576,
+                    slidesPerView: 3,
+                  },
+                  768: {
+                    // width: 768,
+                    slidesPerView: 5,
+                  },
+                  992: {
+                    // width: 768,
+                    slidesPerView: 8,
+                  },
+                }}
               >
                 <SwiperSlide>
                   <div className="slick-single-layout">

@@ -245,7 +245,7 @@ const Cart = () => {
                                 item.color.price * item.quantity
                               ).toLocaleString()}
                         </td>
-                        <td className="product-remove italic">
+                        <td className="product-remove product-remove-status italic">
                           {item.active == 1 ? (
                             <div style={{ color: "green" }}>Đang Chọn Mua</div>
                           ) : (

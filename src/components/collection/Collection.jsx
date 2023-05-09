@@ -17,7 +17,6 @@ const Collection = () => {
       searchData: "",
     })
       .then((res) => {
-        console.log(res.data);
         setCollections(res.data);
       })
       .catch((err) => {

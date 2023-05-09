@@ -114,7 +114,6 @@ const Checkout = () => {
       );
       return;
     }
-    console.log(orders);
 
     // if (!orders.deliveryAddress) {
     //   setIsLoading(false);
@@ -136,7 +135,6 @@ const Checkout = () => {
 
     OrdersService.createClient(orders)
       .then((res) => {
-        console.log(res);
         setCartNumber((prev) => prev - orders.details.length);
         setIsLoading(false);
         toast.success("Đặt hàng thành công!", configToast);

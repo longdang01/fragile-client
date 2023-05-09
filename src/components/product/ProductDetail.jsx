@@ -255,13 +255,34 @@ const ProductDetail = () => {
                           // loop={true}
                           allowTouchMove={false}
                           spaceBetween={10}
-                          slidesPerView={5}
-                          direction="vertical"
+                          // slidesPerView={5}
+                          // direction="vertical"
                           freeMode={true}
                           watchSlidesProgress={true}
                           modules={[FreeMode, Navigation, Thumbs]}
                           // onSlideChange={(swiper) => console.log("1", swiper)}
                           className="mySwiper"
+                          breakpoints={{
+                            0: {
+                              slidesPerView: 5,
+                              direction: "horizontal",
+                            },
+                            576: {
+                              // width: 576,
+                              slidesPerView: 5,
+                              direction: "horizontal",
+                            },
+                            768: {
+                              // width: 768,
+                              slidesPerView: 5,
+                              direction: "horizontal",
+                            },
+                            992: {
+                              // width: 768,
+                              slidesPerView: 5,
+                              direction: "vertical",
+                            },
+                          }}
                         >
                           {color.images.map((image, index) => (
                             <SwiperSlide

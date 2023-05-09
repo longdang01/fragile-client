@@ -64,8 +64,6 @@ const AccountOrders = () => {
       return;
     }
     setIsLoading(true);
-    console.log(itemDelete);
-    console.log(orders);
 
     OrdersService.updateClient(itemDelete, { ...orders, status: 6 })
       .then((res) => {

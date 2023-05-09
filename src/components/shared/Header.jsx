@@ -27,6 +27,8 @@ const Header = ({
   });
 
   const [language, setLanguage] = useState(LANGUAGES[0]);
+  const [toggleMobile, setToggleMobile] = useState(false);
+  const [toggleShop, setToggleShop] = useState(false);
 
   //Header sticky
   const handleHeaderSticky = () => {
@@ -217,19 +219,21 @@ const Header = ({
                   />
                 </Link>
               </div>
-              <div className="header-main-nav">
+              <div
+                className={"header-main-nav " + (toggleMobile ? "open" : "")}
+              >
                 {/* <!-- Start Mainmanu Nav --> */}
                 <nav className="mainmenu-nav">
-                  <button className="mobile-close-btn mobile-nav-toggler">
+                  <button
+                    className="mobile-close-btn mobile-nav-toggler"
+                    onClick={() => setToggleMobile(false)}
+                  >
                     <i className="fas fa-times"></i>
                   </button>
                   <div className="mobile-nav-brand">
-                    <a href="index.html" className="logo">
-                      <img
-                        src="template/images/logo/logo.png"
-                        alt="Site Logo"
-                      />
-                    </a>
+                    <Link to="/" className="logo">
+                      <img src={logo_black} alt="Site Logo" />
+                    </Link>
                   </div>
                   <ul className="mainmenu">
                     <li className="">
@@ -353,7 +357,14 @@ const Header = ({
                         </li>
                       </ul>
                     </li> */}
-                    <li className="menu-item-has-children">
+                    <li
+                      className={
+                        "menu-item-has-children " + (toggleShop ? "open" : "")
+                      }
+                      onClick={() =>
+                        toggleMobile ? setToggleShop(!toggleShop) : null
+                      }
+                    >
                       <a href={undefined} style={{ color: "#292930" }}>
                         Cửa Hàng
                       </a>
@@ -502,12 +513,21 @@ const Header = ({
                     </div>
                   </li>
                   <li className="axil-mobile-toggle">
-                    <button className="menu-btn mobile-nav-toggler">
+                    <button
+                      className="menu-btn mobile-nav-toggler"
+                      onClick={() => setToggleMobile(true)}
+                    >
                       <i className="flaticon-menu-2"></i>
                     </button>
                   </li>
                 </ul>
               </div>
+              {toggleMobile && (
+                <div
+                  className="closeMask"
+                  onClick={() => setToggleMobile(false)}
+                ></div>
+              )}
             </div>
           </div>
         </div>

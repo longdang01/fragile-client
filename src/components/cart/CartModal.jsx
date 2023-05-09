@@ -316,8 +316,7 @@ const CartModal = (props) => {
                 <div className="g-col-12 form-group">
                   <label className="form-label italic">
                     Số Lượng (*)
-                    {cartItem.size &&
-                      " (còn " + cartItem.size.quantity + " số lượng)"}
+                    {cartItem.size && " (còn " + cartItem.size.quantity}
                   </label>
                   <input
                     type="number"

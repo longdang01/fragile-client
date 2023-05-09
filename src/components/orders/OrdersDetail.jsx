@@ -27,8 +27,6 @@ const OrdersDetail = () => {
   const { ordersCode } = useParams();
   const [orders, setOrders] = useState();
 
-  console.log(ordersCode);
-
   const getInfoDeliveryAddress = (id, type) => {
     if (type == 1) {
       const province = regions.find((item) => item.Id == id);
@@ -57,7 +55,6 @@ const OrdersDetail = () => {
     })
       .then((res) => {
         setOrders(res.data.orderses[0]);
-        console.log(res.data.orderses[0]);
         // setOrderses(res.data.orderses);
       })
       .catch((err) => {
