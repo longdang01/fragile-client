@@ -28,7 +28,10 @@ const Hero = () => {
   return (
     <>
       {slides && (
-        <div className="axil-main-slider-area main-slider-style-5 hero">
+        <div
+          className="axil-main-slider-area main-slider-style-5 hero"
+          style={{ minHeight: "100vh" }}
+        >
           <div className="container">
             <div className="slider-box-wrap">
               <div className="slider-activation-two axil-slick-dots">

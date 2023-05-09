@@ -21,7 +21,7 @@ const Layout = () => {
   const [cartNumber, setCartNumber] = useState();
 
   const hasToken = localStorage.getItem("TOKEN");
-  let [loading, setLoading] = useState(true);
+  let [loading, setLoading] = useState(false);
   const getCustomer = async () => {
     const data = hasToken && (await UserService.getMe());
     setCustomer(data && data.data);
