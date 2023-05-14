@@ -100,7 +100,7 @@ const ProductDetail = () => {
       .then((res) => {
         setProduct(res.data);
         setColor(res.data.colors[0]);
-        setSize(res.data.colors[0].sizes[0]);
+        setSize(res.data.colors[0]?.sizes[0]);
       })
       .catch((err) => {
         console.log(err);
@@ -126,6 +126,11 @@ const ProductDetail = () => {
 
   const addToCart = () => {
     // cart_id, product, color, size, quantity, maxquantity?
+
+    if (size.quantity == 0) {
+      toast.error(`Sản phẩm đã hết hàng`, configToast);
+      return;
+    }
 
     if (!variant && quantity > size.quantity) {
       toast.error(`Chọn tối đa ${size.quantity} sản phẩm`, configToast);
@@ -187,16 +192,22 @@ const ProductDetail = () => {
           </title>
         </Helmet>
       </HelmetProvider>
-      {product && color && (
+      {product && color && color.images[0] && size && (
         <div className="axil-single-product-area axil-section-gap pb--0 bg-color-white product-detail-wrap">
           <div className="single-product-thumb mb--40">
             <div className="container">
               <div className="row">
                 <div className="col-lg-7 mb--40">
-                  <div className="row">
+                  <div className="row" style={{ height: "100%" }}>
                     <div className="col-lg-10 order-lg-2">
-                      <div className="single-product-thumbnail-wrap zoom-gallery">
-                        <div className="single-product-thumbnail product-large-thumbnail-3 axil-product">
+                      <div
+                        className="single-product-thumbnail-wrap zoom-gallery"
+                        style={{ height: "100%" }}
+                      >
+                        <div
+                          className="single-product-thumbnail product-large-thumbnail-3 axil-product"
+                          style={{ height: "100%" }}
+                        >
                           {/* Start swiper */}
                           {/* <div className="thumbnail">
                           <a className="popup-zoom">
