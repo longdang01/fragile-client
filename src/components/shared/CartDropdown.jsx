@@ -306,7 +306,18 @@ const CartDropdown = ({
               )}
 
               {!customer && (
-                <span className="font-bold">Đăng nhập để xem giỏ hàng</span>
+                <>
+                  <div className="cart-header">
+                    <h2 className="header-title font-bold">Giỏ Hàng</h2>
+                    <button
+                      className="cart-close sidebar-close"
+                      onClick={() => setShowCartDropdown(false)}
+                    >
+                      <i className="fas fa-times"></i>
+                    </button>
+                  </div>
+                  <span className="font-bold">Đăng nhập để xem giỏ hàng</span>
+                </>
               )}
             </div>
           </div>

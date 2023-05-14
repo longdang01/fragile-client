@@ -15,9 +15,10 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import "swiper/css/zoom";
 
 // import required modules
-import { FreeMode, Navigation, Thumbs } from "swiper";
+import { Zoom, FreeMode, Navigation, Thumbs } from "swiper";
 import "./Product.scss";
 
 const TITLE = "Chi Tiết Sản Phẩm";
@@ -221,6 +222,7 @@ const ProductDetail = () => {
                               "--swiper-pagination-color": "#fff",
                             }}
                             // loop={true}
+                            zoom={true}
                             spaceBetween={10}
                             navigation={true}
                             thumbs={{
@@ -229,12 +231,14 @@ const ProductDetail = () => {
                                   ? thumbsSwiper
                                   : null,
                             }}
-                            modules={[FreeMode, Navigation, Thumbs]}
+                            modules={[Zoom, FreeMode, Navigation, Thumbs]}
                             className="mySwiper2"
                           >
                             {color.images.map((image, index) => (
                               <SwiperSlide key={index}>
-                                <img src={image.picture} />
+                                <div className="swiper-zoom-container">
+                                  <img src={image.picture} />
+                                </div>
                               </SwiperSlide>
                             ))}
                           </Swiper>
@@ -249,12 +253,12 @@ const ProductDetail = () => {
                             </div>
                           </div>
                         )}
-                        <div className="product-quick-view position-view">
+                        {/* <div className="product-quick-view position-view">
                           <a className="popup-zoom">
-                            {/* <i className="far fa-search-plus"></i> */}
+                            <i className="far fa-search-plus"></i>
                             <i className="uil uil-search-plus"></i>
                           </a>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     <div className="col-lg-2 order-lg-1">
